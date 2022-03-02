@@ -101,10 +101,9 @@ export const login = async (params: any) => {
  * 获取用户详细信息
  *@param username 账号
  */
-export const getCurrentUserInfo = async (query: any) => {
+export const getCurrentUserInfo = async () => {
   const data = await request(`/api/user/detail`, {
     method: 'GET',
-    params: query,
   });
   return data;
 };

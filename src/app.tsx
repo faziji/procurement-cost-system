@@ -24,15 +24,25 @@ export async function getInitialState(): Promise<{
   currentUser?: API.CurrentUser;
   fetchUserInfo?: (username: any) => Promise<API.CurrentUser | undefined>;
 }> {
-  const fetchUserInfo = async (username: any) => {
+  const fetchUserInfo = async () => {
     try {
-      let res = await getCurrentUserInfo({ username });
+      let res = await getCurrentUserInfo();
       return res.data;
     } catch (error) {
       history.push(loginPath);
     }
     return undefined;
   };
+
+  // 如果是登录页面，不执行
+  if (history.location.pathname !== loginPath) {
+    const currentUser = await fetchUserInfo();
+    return {
+      fetchUserInfo,
+      currentUser,
+      settings: {},
+    };
+  }
 
   return {
     fetchUserInfo,

@@ -44,29 +44,29 @@
   },
 
   // 个人中心
-  // {
-  //   path: '/account',
-  //   name: 'account',
-  //   icon: 'crown',
-  //   // component: './TestPage',
-  //   routes: [
-  //     {
-  //       path: '/account/center',
-  //       name: 'center',
-  //       icon: 'smile',
-  //       component: './account/center',
-  //     },
-  //     {
-  //       path: '/account/settings',
-  //       name: 'settings',
-  //       icon: 'smile',
-  //       component: './account/settings',
-  //     },
-  //     {
-  //       component: './404',
-  //     },
-  //   ],
-  // },
+  {
+    path: '/account',
+    name: 'account',
+    icon: 'crown',
+    // component: './TestPage',
+    routes: [
+      {
+        path: '/account/center',
+        name: 'center',
+        icon: 'smile',
+        component: './account/center',
+      },
+      {
+        path: '/account/settings',
+        name: 'settings',
+        icon: 'smile',
+        component: './TestPage',
+      },
+      {
+        component: './404',
+      },
+    ],
+  },
 
   {
     name: 'list.table-list',
