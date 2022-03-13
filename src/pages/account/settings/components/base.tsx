@@ -49,7 +49,7 @@ const AvatarView = ({ avatar }: { avatar: string }) => {
       <div className={styles.avatar}>
         <img src={avatarProps} alt="avatar" />
       </div>
-      <Upload data={{ username: localStorage.getItem("username") }} onChange={handleUploadAvatar} action="http://172.21.40.25:8000/api/user/uploadFile" showUploadList={false}>
+      <Upload data={{ username: localStorage.getItem("username") }} onChange={handleUploadAvatar} action="http://172.21.40.25:3000/api/user/uploadAvatar" showUploadList={false}>
         <div className={styles.button_view}>
           <Button>
             <UploadOutlined />

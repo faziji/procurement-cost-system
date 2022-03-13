@@ -75,6 +75,41 @@
     component: './TableList',
   },
   {
+    path: '/system',
+    icon: 'crown',
+    name: '系统管理',
+    // component: './System',
+    routes: [
+      {
+        path: '/system/consultation',
+        name: '征询意见',
+        icon: 'smile',
+        component: './system/Consultation',
+      },
+      {
+        path: '/system/purchase-announcement',
+        name: '采购公告',
+        icon: 'smile',
+        component: './system/PurchaseAnnouncement',
+      },
+      {
+        path: '/system/result-announcement',
+        name: '结果公告',
+        icon: 'smile',
+        component: './system/ResultAnnouncement',
+      },
+      {
+        path: '/system/correct-announcement',
+        name: '更正公告',
+        icon: 'smile',
+        component: './system/CorrectAnnouncement',
+      },
+      {
+        component: './404',
+      },
+    ],
+  },
+  {
     path: '/',
     redirect: '/welcome',
   },

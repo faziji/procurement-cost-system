@@ -6,7 +6,20 @@ This project is initialized with [Ant Design Pro](https://pro.ant.design). Follo
 
 `git commit --no-verify -m "XXX"`
 
-项目中存在pre-commit(客户端)钩子，在提交前会自动进行风格检查。进入项目的.git文件夹(文件夹默认隐藏,可先设置显示或者命令ls查找),再进入hooks文件夹,删除pre-commit文件,重新git commit -m 'xxx' git push即可。问题已经解决！
+项目中存在 pre-commit(客户端)钩子，在提交前会自动进行风格检查。进入项目的.git 文件夹(文件夹默认隐藏,可先设置显示或者命令 ls 查找),再进入 hooks 文件夹,删除 pre-commit 文件,重新 git commit -m 'xxx' git push 即可。问题已经解决！
+
+## 组件模板
+
+```js
+import React from 'react';
+interface IProps {}
+// import Center from './account/center'
+const System: React.FC<IProps> = (props: IProps) => {
+  return <div></div>;
+};
+
+export default System;
+```
 
 ## Environment Prepare
 
