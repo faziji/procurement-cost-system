@@ -67,7 +67,6 @@
       },
     ],
   },
-
   {
     name: 'list.table-list',
     icon: 'table',
@@ -76,7 +75,7 @@
   },
   {
     path: '/system',
-    icon: 'crown',
+    icon: 'SettingOutlined',
     name: '系统管理',
     // component: './System',
     routes: [
@@ -103,6 +102,27 @@
         name: '更正公告',
         icon: 'smile',
         component: './system/CorrectAnnouncement',
+      },
+      {
+        component: './404',
+      },
+    ],
+  },
+  {
+    path: '/Users',
+    icon: 'UserOutlined',
+    name: '用户管理',
+    // component: './TestPage',
+    routes: [
+      {
+        path: '/Users/supplier',
+        name: '供应商管理',
+        component: './Users/Supplier',
+      },
+      {
+        path: '/Users/hr',
+        name: '企业人事管理',
+        component: './Users/Hr',
       },
       {
         component: './404',

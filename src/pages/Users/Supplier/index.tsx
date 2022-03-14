@@ -17,7 +17,7 @@ import ProDescriptions, { ProDescriptionsItemProps } from '@ant-design/pro-descr
 import moment from 'moment';
 
 
-const Consultation: React.FC = () => {
+const Supplier: React.FC = () => {
   /**
    * @en-US Pop-up window of new window
    * @zh-CN 新建窗口的弹窗
@@ -479,4 +479,4 @@ const Consultation: React.FC = () => {
   );
 };
 
-export default Consultation;
+export default Supplier;
