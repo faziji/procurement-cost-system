@@ -58,6 +58,7 @@ const Login: React.FC = () => {
 
       // 为了后端不用多一次解析username //!!!待优化
       localStorage.setItem('username', userInfo?.username);
+      localStorage.setItem('userInfo', JSON.stringify(userInfo));
 
       /** 此方法会跳转到 redirect 参数所在的位置 */
       if (!history) return;

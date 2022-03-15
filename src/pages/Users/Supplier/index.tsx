@@ -1,5 +1,5 @@
 import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
-import { Button, message, Drawer, Upload, Popover } from 'antd';
+import { Button, message, Drawer, Upload, Popover, Radio } from 'antd';
 import React, { useState, useRef } from 'react';
 import { useIntl, FormattedMessage } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
@@ -9,6 +9,7 @@ import ProForm, { ModalForm, ProFormDateTimePicker, ProFormRadio, ProFormText, P
 import UpdateForm from './components/UpdateForm';
 
 import { getConsultationList, createtConsultation, deleteConsultations, updateConsultation } from '@/services/resources/api'
+import { getSupplierList, updateSupplierDetail, deleteSuppliers, handleReview } from '@/services/supplier/api'
 
 // 文件预览
 import FileViewer from 'react-file-viewer';
@@ -18,6 +19,14 @@ import moment from 'moment';
 
 
 const Supplier: React.FC = () => {
+  /**
+   * 资格审核表单
+   */
+  const [reviewModalVisible, handleReviewModalVisible] = useState<boolean>(false);
+  const [reviewValue, setReviewValue] = useState("supplier");
+  const [reviewInfo, setReviewInfo] = useState("");
+
+
   /**
    * @en-US Pop-up window of new window
    * @zh-CN 新建窗口的弹窗
@@ -41,8 +50,10 @@ const Supplier: React.FC = () => {
   const [showDetail, setShowDetail] = useState<boolean>(false);
 
   const actionRef = useRef<ActionType>();
-  const [currentRow, setCurrentRow] = useState<API.RuleListItem>();
+  const [currentRow, setCurrentRow] = useState<any>();
   const [selectedRowsState, setSelectedRows] = useState<API.RuleListItem[]>([]);
+  console.log('11111111111111111', selectedRowsState);
+
 
   // 上传成功
   const [uploadKey, setUploadKey] = useState("")
@@ -107,11 +118,11 @@ const Supplier: React.FC = () => {
    * @param fields
    */
   const handleUpdate = async (fields: any) => {
-    console.log('1111111111111111111', fields);
+    // console.log('1111111111111111111', fields);
 
     const hide = message.loading('Configuring');
     try {
-      await updateConsultation(fields);
+      await updateSupplierDetail(fields);
       hide();
 
       message.success('Configuration is successful');
@@ -131,9 +142,11 @@ const Supplier: React.FC = () => {
    */
   const handleRemove = async (selectedRows: any) => {
     const hide = message.loading('正在删除');
+    console.log('selectedRows', selectedRows);
+
     if (!selectedRows) return true;
     try {
-      await deleteConsultations({
+      await deleteSuppliers({
         ids: selectedRows.map((row: any) => row.id),
       });
       hide();
@@ -147,28 +160,21 @@ const Supplier: React.FC = () => {
   };
 
   /**
-   * 确认删除当前节点
-   */
-  // const onConfirmDelete = (record: any) => {
-  //   console.log('删除的是', record);
-  // }
-
-  /**
    * @en-US International configuration
    * @zh-CN 国际化配置
    * */
   const intl = useIntl();
 
-  const columns: ProColumns<API.RuleListItem>[] = [
+  const columns: any = [
     {
-      title: <FormattedMessage id="pages.searchTable.ID" defaultMessage="ID" />,
+      title: "ID",
       dataIndex: 'id',
       valueType: 'textarea',
     },
     {
-      title: "意见名称",
-      dataIndex: 'name',
-      tip: 'The file name is the unique key',
+      title: "公司名称",
+      dataIndex: 'companyName',
+      tip: 'The company name is the unique key',
       render: (dom, entity) => {
         return (
           <a
@@ -183,8 +189,23 @@ const Supplier: React.FC = () => {
       },
     },
     {
-      title: "意见描述",
-      dataIndex: 'description',
+      title: "社会统一信用代码",
+      dataIndex: 'username',
+      valueType: 'textarea',
+    },
+    {
+      title: "联系人姓名",
+      dataIndex: 'name',
+      valueType: 'textarea',
+    },
+    {
+      title: "联系人电话",
+      dataIndex: 'phone',
+      valueType: 'textarea',
+    },
+    {
+      title: "联系人邮箱",
+      dataIndex: 'email',
       valueType: 'textarea',
     },
     {
@@ -192,63 +213,60 @@ const Supplier: React.FC = () => {
       dataIndex: 'status',
       hideInForm: true,
       valueEnum: {
-        0: {
-          text: (
-            <FormattedMessage
-              id="pages.searchTable.nameStatus.default"
-              defaultMessage="Unpublished"
-            />
-          ),
-          status: 'Default',
+        'enable': {
+          text: "正常",
+          status: 'Success',
         },
-        1: {
-          text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.running" defaultMessage="Running" />
-          ),
-          status: 'Processing',
-        },
-        2: {
-          text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.finished" defaultMessage="Finished" />
-          ),
-          status: 'Error',
-        },
-        3: {
-          text: (
-            <FormattedMessage
-              id="pages.searchTable.nameStatus.abnormal"
-              defaultMessage="Abnormal"
-            />
-          ),
+        'disable': {
+          text: "已禁用",
           status: 'Error',
         },
       },
     },
     {
-      title: "发布人",
-      dataIndex: 'publisher',
+      title: "身份权限",
+      dataIndex: 'role',
+      hideInForm: true,
+      valueEnum: {
+        'supplier': {
+          text: "已通过",
+          status: 'Success',
+        },
+        'supplier-reviewing': {
+          text: "待通过",
+          status: 'Processing',
+        },
+        'supplier-unaccess': {
+          text: "审核不通过",
+          status: 'Error',
+        },
+      },
+    },
+    {
+      title: "评分",
+      dataIndex: 'score',
       valueType: 'textarea',
     },
     {
-      title: "发布时间",
-      dataIndex: 'publishTime',
+      title: "审核人",
+      dataIndex: 'reviewer',
+      valueType: 'textarea',
+    },
+    // {
+    //   title: "邀请人",
+    //   dataIndex: 'inviter',
+    //   valueType: 'textarea',
+    // },
+    {
+      title: "创建时间",
+      dataIndex: "createdAt",
       valueType: 'textarea',
     },
     {
-      title: "生效时间",
-      dataIndex: 'startTime',
-      valueType: 'textarea',
-    },
-    {
-      title: "结束时间",
-      dataIndex: 'endTime',
-      valueType: 'textarea',
-    },
-    {
-      title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="Operating" />,
+      title: "操作",
       dataIndex: 'option',
       valueType: 'option',
-      render: (_, record) => [
+      render: (_: any, record: any) => [
         <a
           key="config"
           onClick={() => {
@@ -256,7 +274,25 @@ const Supplier: React.FC = () => {
             setCurrentRow(record);
           }}
         >
-          配置
+          更新
+        </a>,
+        <a
+          key="config"
+          onClick={() => {
+            if (record?.role === "supplier") {
+              message.info("该用户身份权限已通过，无需重复审核！")
+              return;
+            }
+            else if (record?.role === "supplier-unaccess") {
+              message.info(`该供应商已被【${record?.reviewer}】审核为不通过，反馈信息为：【${record?.reviewInfo}】需要供应商重新提交注册申请 或 管理员更新该供应商的注册信息。`, 10)
+              return;
+            }
+            handleReviewModalVisible(true);
+            setCurrentRow(record);
+            setReviewInfo(currentRow?.reviewInfo)
+          }}
+        >
+          审核
         </a>
       ],
     },
@@ -298,13 +334,10 @@ const Supplier: React.FC = () => {
 
   return (
     <PageContainer>
-      <ProTable<API.RuleListItem, API.PageParams>
-        headerTitle={intl.formatMessage({
-          id: 'pages.searchTable.title',
-          defaultMessage: 'Enquiry form',
-        })}
+      <ProTable
+        headerTitle="查询供应商"
         actionRef={actionRef}
-        rowKey="key"
+        rowKey="id"
         search={{
           labelWidth: 120,
         }}
@@ -315,11 +348,12 @@ const Supplier: React.FC = () => {
             onClick={() => {
               handleModalVisible(true);
             }}
+            disabled
           >
-            <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="New" />
+            <PlusOutlined /> 新建
           </Button>,
         ]}
-        request={getConsultationList}
+        request={getSupplierList}
         columns={columns}
         rowSelection={{
           onChange: (_, selectedRows) => {
@@ -331,9 +365,9 @@ const Supplier: React.FC = () => {
         <FooterToolbar
           extra={
             <div>
-              <FormattedMessage id="pages.searchTable.chosen" defaultMessage="Chosen" />{' '}
+              选择{' '}
               <a style={{ fontWeight: 600 }}>{selectedRowsState.length}</a>{' '}
-              <FormattedMessage id="pages.searchTable.item" defaultMessage="项" />
+              项
               &nbsp;&nbsp;
             </div>
           }
@@ -344,13 +378,15 @@ const Supplier: React.FC = () => {
               setSelectedRows([]);
               actionRef.current?.reloadAndRest?.();
             }}
+            type="primary"
+            danger
           >
             批量删除
           </Button>
         </FooterToolbar>
       )}
       {/* 关闭即销毁 */}
-      {createModalVisible ?
+      {/* {createModalVisible ?
         <ModalForm
           title={intl.formatMessage({
             id: 'pages.searchTable.createForm.newRule',
@@ -429,6 +465,65 @@ const Supplier: React.FC = () => {
               options={['新建暂不发布', '新建并发布']}
             />
           </ProForm.Group>
+        </ModalForm> : null} */}
+      {reviewModalVisible ?
+        <ModalForm
+          title="资格审核"
+          width="1200px"
+          visible={reviewModalVisible}
+          onVisibleChange={handleReviewModalVisible}
+          onFinish={async (value) => {
+            console.log('提交的数据', value);
+
+            const success = await updateSupplierDetail({ username: currentRow?.username, role: reviewValue, reviewer: JSON.parse(localStorage?.getItem('userInfo') || '{}')?.name, reviewInfo: value?.reviewInfo });
+            if (success) {
+              handleReviewModalVisible(false);
+              // 有改动，关闭弹窗时也自动清空
+              if (actionRef.current) {
+                actionRef.current.reload();
+              }
+            }
+          }}
+        >
+          {JSON.stringify(currentRow)}
+          {
+            currentRow?.username && (
+              <>
+                <ProDescriptions
+                  column={2}
+                  title={currentRow?.username}
+                  request={async () => ({
+                    data: currentRow || {},
+                  })}
+                  params={{
+                    id: currentRow?.username,
+                  }}
+                  columns={columns}
+                />
+                <hr />
+                是否通过该供应商的资格审核？<br />
+                <Radio.Group onChange={(e) => setReviewValue(e.target.value)} value={reviewValue}>
+                  <Radio value="supplier">通过</Radio>
+                  <Radio value="supplier-unaccess">不通过</Radio>
+                </Radio.Group>
+                {
+                  reviewValue === "supplier-unaccess" && (
+                    <ProFormTextArea
+                      name="reviewInfo"
+                      label="信息反馈"
+                      rules={[
+                        {
+                          required: true,
+                          message: '请输入不通过的信息反馈',
+                        },
+                      ]}
+                      placeholder="信息反馈"
+                    />
+                  )
+                }
+              </>
+            )
+          }
         </ModalForm> : null}
 
       <UpdateForm
@@ -452,6 +547,7 @@ const Supplier: React.FC = () => {
         values={currentRow || {}}
       />
 
+
       <Drawer
         width={600}
         visible={showDetail}
@@ -462,7 +558,7 @@ const Supplier: React.FC = () => {
         closable={false}
       >
         {currentRow?.name && (
-          <ProDescriptions<API.RuleListItem>
+          <ProDescriptions
             column={2}
             title={currentRow?.name}
             request={async () => ({
@@ -471,7 +567,7 @@ const Supplier: React.FC = () => {
             params={{
               id: currentRow?.name,
             }}
-            columns={columns as ProDescriptionsItemProps<API.RuleListItem>[]}
+            columns={columns}
           />
         )}
       </Drawer>

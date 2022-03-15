@@ -304,7 +304,7 @@ const Consultation: React.FC = () => {
           defaultMessage: 'Enquiry form',
         })}
         actionRef={actionRef}
-        rowKey="key"
+        rowKey="id"
         search={{
           labelWidth: 120,
         }}
@@ -344,6 +344,8 @@ const Consultation: React.FC = () => {
               setSelectedRows([]);
               actionRef.current?.reloadAndRest?.();
             }}
+            danger
+            type="primary"
           >
             批量删除
           </Button>

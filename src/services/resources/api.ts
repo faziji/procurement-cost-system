@@ -99,6 +99,7 @@ request.interceptors.response.use((res) => {
     // 清除token
     localStorage.removeItem('token');
     localStorage.removeItem('username');
+    localStorage.removeItem('userInfo');
     // jump login
     history.push('/user/login');
   }

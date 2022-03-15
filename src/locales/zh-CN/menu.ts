@@ -57,4 +57,12 @@ export default {
   'menu.editor.flow': '流程编辑器',
   'menu.editor.mind': '脑图编辑器',
   'menu.editor.koni': '拓扑编辑器',
+  'pages.searchTable.title': '查询表格',
+  'pages.searchTable.chosen': '选择',
+  'pages.searchTable.updateForm.ruleConfig': '征询意见配置',
+  'pages.searchTable.UpdateForm.Supplier': '供应商更新',
+  'pages.searchTable.UpdateForm.elseInfo': '其他信息',
+  'pages.searchTable.Supplier': '供应商用户管理',
+  'pages.searchTable.new': '新建',
+  'pages.searchTable.item': '项',
 };

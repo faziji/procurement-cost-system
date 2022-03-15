@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal } from 'antd';
-import {
+import ProForm, {
   ProFormSelect,
   ProFormText,
   ProFormTextArea,
@@ -21,12 +21,12 @@ const UpdateForm: React.FC<any> = (props) => {
       stepsFormRender={(dom, submitter) => {
         return (
           <Modal
-            width={640}
+            width={1200}
             bodyStyle={{ padding: '32px 40px 48px' }}
             destroyOnClose
             title={intl.formatMessage({
-              id: 'pages.searchTable.updateForm.ruleConfig',
-              defaultMessage: '征询意见配置',
+              id: 'pages.searchTable.UpdateForm.Supplier',
+              defaultMessage: '供应商更新',
             })}
             visible={props.updateModalVisible}
             footer={submitter}
@@ -43,61 +43,109 @@ const UpdateForm: React.FC<any> = (props) => {
       <StepsForm.StepForm
         initialValues={{
           name: props.values.name,
-          description: props.values.description,
-          endTime: props.values.endTime,
-          startTime: props.values.startTime,
-          key: props.values.key,
-          id: props.values.id
+          phone: props.values.phone,
+          email: props.values.email,
+          status: props.values.status,
+          role: props.values.role,
+          id: props.values.id,
+          score: props.values.score,
+          shoukuanAccount: props.values.shoukuanAccount,
+          fukuanAccount: props.values.fukuanAccount,
+          fukuan: props.values.fukuan,
+          shoukuan: props.values.shoukuan,
+          inviter: props.values.inviter,
+          note: props.values.note,
+          companyName: props.values.companyName,
+          username: props.values.username,
         }}
         title={intl.formatMessage({
           id: 'pages.searchTable.updateForm.basicConfig',
           defaultMessage: '基本信息',
         })}
       >
-        <ProFormText
-          name="id"
-          label={intl.formatMessage({
-            id: 'pages.searchTable.updateForm.ruleName.ID',
-            defaultMessage: 'ID',
-          })}
-          width="md"
-          disabled
-        />
-        <ProFormText
-          name="description"
-          label={intl.formatMessage({
-            id: 'pages.searchTable.updateForm.ruleName.description',
-            defaultMessage: '征询意见描述',
-          })}
-          width="md"
-        />
-        <ProFormDateTimePicker
-          name="startTime"
-          width="md"
-          label="意见生效时间"
-          rules={[
-            {
-              required: true,
-              message: '请选择意见生效时间！',
-            },
-          ]}
-        />
-        <ProFormDateTimePicker
-          name="endTime"
-          width="md"
-          label="意见结束时间"
-          rules={[
-            {
-              required: true,
-              message: '请选择意见结束时间！',
-            },
-          ]}
-        />
-        <ProFormTextArea
-          name="description"
-          width="md"
-          label="描述"
-        />
+        {/* {JSON.stringify(props.values)} */}
+        <ProForm.Group>
+          <ProFormText
+            name="id"
+            label={intl.formatMessage({
+              id: 'pages.searchTable.updateForm.ruleName.ID',
+              defaultMessage: 'ID',
+            })}
+            width="md"
+            rules={[
+              {
+                required: true,
+                message: '请输入id!',
+              },
+            ]}
+            disabled
+          />
+          <ProFormText
+            name="name"
+            label="联系人姓名"
+            width="md"
+            rules={[
+              {
+                required: true,
+                message: '请输入联系人姓名!',
+              },
+            ]}
+          />
+        </ProForm.Group>
+        <ProForm.Group>
+          <ProFormText
+            name="companyName"
+            label="公司名称"
+            width="md"
+            rules={[
+              {
+                required: true,
+                message: '请输入公司名称!',
+              },
+            ]}
+          />
+
+          <ProFormText
+            name="username"
+            label="社会统一信用代码"
+            width="md"
+            rules={[
+              {
+                required: true,
+                message: '请输入社会统一信用代码!',
+              },
+            ]}
+          />
+
+        </ProForm.Group>
+        <ProForm.Group>
+          <ProFormText
+            name="phone"
+            label="联系人电话"
+            width="md"
+            rules={[
+              {
+                required: true,
+                message: '请输入联系人电话!',
+              },
+            ]}
+          />
+
+          <ProFormText
+            name="email"
+            label="联系人邮箱"
+            width="md"
+            rules={[
+              {
+                required: true,
+                message: '请输入联系人邮箱!',
+              },
+            ]}
+          />
+
+        </ProForm.Group>
+
+
       </StepsForm.StepForm>
       <StepsForm.StepForm
         initialValues={{
@@ -105,29 +153,59 @@ const UpdateForm: React.FC<any> = (props) => {
           frequency: 'month',
         }}
         title={intl.formatMessage({
-          id: 'pages.searchTable.updateForm.schedulingPeriod.title',
-          defaultMessage: '选择关联公告',
+          id: 'pages.searchTable.UpdateForm.elseInfo',
+          defaultMessage: '其他信息',
         })}
       >
-        <ProFormDateTimePicker
-          name="time"
-          width="md"
-          label={intl.formatMessage({
-            id: 'pages.searchTable.updateForm.schedulingPeriod.timeLabel',
-            defaultMessage: '开始时间',
-          })}
-        />
-        <ProFormSelect
-          name="frequency"
-          label={intl.formatMessage({
-            id: 'pages.searchTable.updateForm.object',
-            defaultMessage: '监控对象',
-          })}
-          width="md"
-          valueEnum={{
-            month: '月',
-            week: '周',
-          }}
+        <ProForm.Group>
+          <ProFormText
+            name="fukuan"
+            label="付款人/付款公司"
+            width="md"
+          />
+          <ProFormText
+            name="shoukuan"
+            label="收款人/收款公司"
+            width="md"
+          />
+        </ProForm.Group>
+        <ProForm.Group>
+          <ProFormText
+            name="shoukuanAccount"
+            label="收款账户"
+            width="md"
+          />
+          <ProFormText
+            name="fukuanAccount"
+            label="付款账户"
+            width="md"
+          />
+        </ProForm.Group>
+        <ProForm.Group>
+          <ProFormText
+            name="inviter"
+            label="邀请人"
+            width="md"
+          />
+          <ProFormTextArea
+            name="note"
+            width="md"
+            label="备注"
+          />
+        </ProForm.Group>
+        <ProFormRadio.Group
+          name="status"
+          label="账号状态"
+          options={[
+            {
+              label: '正常状态',
+              value: 'enable',
+            },
+            {
+              label: '停用',
+              value: 'disable',
+            },
+          ]}
         />
       </StepsForm.StepForm>
     </StepsForm>

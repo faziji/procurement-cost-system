@@ -30,6 +30,7 @@ const loginOut = async () => {
     // 清除token
     localStorage.removeItem("token")
     localStorage.removeItem("username")
+    localStorage.removeItem("userInfo")
   }
 };
 

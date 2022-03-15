@@ -106,25 +106,54 @@ request.interceptors.response.use((res) => {
   return res;
 });
 
-/**
- * 用户登录
- *@param username 账号；password 密码
- */
-export const login = async (params: any) => {
-  const data = await request(`/api/user/login`, {
-    method: 'POST',
-    data: params,
-  });
-  return data;
-};
-
-/**
- * 获取用户详细信息
- *@param username 账号
- */
-export const getCurrentUserInfo = async () => {
-  const data = await request(`/api/user/detail`, {
+/** 获取供应商列表 GET /api/resource/getSupplierList */
+export async function getSupplierList(
+  params: {
+    // query
+    /** 当前的页码 */
+    current?: number;
+    /** 页面的容量 */
+    pageSize?: number;
+  },
+  options?: { [key: string]: any },
+) {
+  return request<any>('/api/supplier/getSupplierList', {
     method: 'GET',
+    params: {
+      ...params,
+    },
+    ...(options || {}),
   });
-  return data;
-};
+}
+
+/** 创建征询意见 POST /api/resource/createtConsultation */
+// export async function createtConsultation(data: any, options?: { [key: string]: any }) {
+//   console.log('2222222222222222', data);
+//   return request<any>('/api/resource/createtConsultation', {
+//     method: 'POST',
+//     data,
+//     ...(options || {}),
+//   });
+// }
+
+/** 更新供应商信息 POST /api/supplier/updateSupplierDetail */
+export async function updateSupplierDetail(data: any, options?: { [key: string]: any }) {
+  return request<any>('/api/supplier/updateSupplierDetail', {
+    method: 'POST',
+    data,
+    ...(options || {}),
+  });
+}
+
+// /** 批量删除 POST /api/resource/deleteSuppliers */
+export async function deleteSuppliers(data: any, options?: { [key: string]: any }) {
+  console.log('2222222222222222', data);
+  return request<any>('/api/resource/deleteSuppliers', {
+    method: 'POST',
+    data,
+    ...(options || {}),
+  });
+}
+
+// deleteConsultations
+// createtConsultation
