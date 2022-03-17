@@ -52,7 +52,6 @@ const Supplier: React.FC = () => {
   const actionRef = useRef<ActionType>();
   const [currentRow, setCurrentRow] = useState<any>();
   const [selectedRowsState, setSelectedRows] = useState<API.RuleListItem[]>([]);
-  console.log('11111111111111111', selectedRowsState);
 
 
   // 上传成功
@@ -159,11 +158,6 @@ const Supplier: React.FC = () => {
     }
   };
 
-  /**
-   * @en-US International configuration
-   * @zh-CN 国际化配置
-   * */
-  const intl = useIntl();
 
   const columns: any = [
     {
@@ -214,7 +208,7 @@ const Supplier: React.FC = () => {
       hideInForm: true,
       valueEnum: {
         'enable': {
-          text: "正常",
+          text: "启用中",
           status: 'Success',
         },
         'disable': {
@@ -252,11 +246,11 @@ const Supplier: React.FC = () => {
       dataIndex: 'reviewer',
       valueType: 'textarea',
     },
-    // {
-    //   title: "邀请人",
-    //   dataIndex: 'inviter',
-    //   valueType: 'textarea',
-    // },
+    {
+      title: "邀请人",
+      dataIndex: 'inviter',
+      valueType: 'textarea',
+    },
     {
       title: "创建时间",
       dataIndex: "createdAt",
@@ -284,7 +278,7 @@ const Supplier: React.FC = () => {
               return;
             }
             else if (record?.role === "supplier-unaccess") {
-              message.info(`该供应商已被【${record?.reviewer}】审核为不通过，反馈信息为：【${record?.reviewInfo}】需要供应商重新提交注册申请 或 管理员更新该供应商的注册信息。`, 10)
+              message.info(`该供应商已被【${record?.reviewer}】审核为不通过，反馈信息为：【${record?.reviewInfo}】需要供应商重新提交注册申请 或 管理员更新该供应商的注册信息。`, 7)
               return;
             }
             handleReviewModalVisible(true);

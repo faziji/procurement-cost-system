@@ -106,6 +106,11 @@ request.interceptors.response.use((res) => {
   return res;
 });
 
+/**
+ * =====================================================
+ * ====================征询意见=========================
+ * =====================================================
+ */
 /** 获取征询意见列表 GET /api/resource/getConsultationList */
 export async function getConsultationList(
   params: {
@@ -136,7 +141,7 @@ export async function createtConsultation(data: any, options?: { [key: string]: 
   });
 }
 
-/** 更新征询意见 POST /api/resource/createtConsultation */
+/** 更新征询意见 POST /api/resource/updateConsultation */
 export async function updateConsultation(data: any, options?: { [key: string]: any }) {
   return request<any>('/api/resource/updateConsultation', {
     method: 'POST',
@@ -145,7 +150,7 @@ export async function updateConsultation(data: any, options?: { [key: string]: a
   });
 }
 
-/** 批量删除征询意见 POST /api/resource/createtConsultation */
+/** 批量删除征询意见 POST /api/resource/deleteConsultations */
 export async function deleteConsultations(data: any, options?: { [key: string]: any }) {
   console.log('2222222222222222', data);
   return request<any>('/api/resource/deleteConsultations', {
@@ -155,5 +160,164 @@ export async function deleteConsultations(data: any, options?: { [key: string]: 
   });
 }
 
-// deleteConsultations
-// createtConsultation
+/**
+ * =====================================================
+ * ====================结果公告=========================
+ * =====================================================
+ */
+/** 获取结果公告列表 GET /api/resource/getConsultationList */
+export async function getResultAnnouncementList(
+  params: {
+    // query
+    /** 当前的页码 */
+    current?: number;
+    /** 页面的容量 */
+    pageSize?: number;
+  },
+  options?: { [key: string]: any },
+) {
+  return request<API.RuleList>('/api/resource/getResultAnnouncementList', {
+    method: 'GET',
+    params: {
+      ...params,
+    },
+    ...(options || {}),
+  });
+}
+
+/** 更新结果公告 POST /api/resource/updateResultAnnouncement */
+export async function updateResultAnnouncement(data: any, options?: { [key: string]: any }) {
+  return request<any>('/api/resource/updateResultAnnouncement', {
+    method: 'POST',
+    data,
+    ...(options || {}),
+  });
+}
+
+/** 创建结果公告 POST /api/resource/createResultAnnouncement */
+export async function createResultAnnouncement(data: any, options?: { [key: string]: any }) {
+  console.log('2222222222222222', data);
+  return request<any>('/api/resource/createResultAnnouncement', {
+    method: 'POST',
+    data,
+    ...(options || {}),
+  });
+}
+
+/** 批量删除征询意见 POST /api/resource/deleteResultAnnouncements */
+export async function deleteResultAnnouncements(data: any, options?: { [key: string]: any }) {
+  console.log('2222222222222222', data);
+  return request<any>('/api/resource/deleteResultAnnouncements', {
+    method: 'POST',
+    data,
+    ...(options || {}),
+  });
+}
+
+/**
+ * =====================================================
+ * ====================更正公告=========================
+ * =====================================================
+ */
+/** 获取更正公告列表 GET /api/resource/getCorrectAnnouncementList */
+export async function getCorrectAnnouncementList(
+  params: {
+    // query
+    /** 当前的页码 */
+    current?: number;
+    /** 页面的容量 */
+    pageSize?: number;
+  },
+  options?: { [key: string]: any },
+) {
+  return request<API.RuleList>('/api/resource/getCorrectAnnouncementList', {
+    method: 'GET',
+    params: {
+      ...params,
+    },
+    ...(options || {}),
+  });
+}
+
+/** 更新公告列表 POST /api/resource/updateCorrectAnnouncement */
+export async function updateCorrectAnnouncement(data: any, options?: { [key: string]: any }) {
+  return request<any>('/api/resource/updateCorrectAnnouncement', {
+    method: 'POST',
+    data,
+    ...(options || {}),
+  });
+}
+
+/** 创建更正公告 POST /api/resource/createCorrectAnnouncement */
+export async function createCorrectAnnouncement(data: any, options?: { [key: string]: any }) {
+  console.log('2222222222222222', data);
+  return request<any>('/api/resource/createCorrectAnnouncement', {
+    method: 'POST',
+    data,
+    ...(options || {}),
+  });
+}
+
+/** 批量删除征询意见 POST /api/resource/deleteCorrectAnnouncements */
+export async function deleteCorrectAnnouncements(data: any, options?: { [key: string]: any }) {
+  console.log('2222222222222222', data);
+  return request<any>('/api/resource/deleteCorrectAnnouncements', {
+    method: 'POST',
+    data,
+    ...(options || {}),
+  });
+}
+
+/**
+ * =====================================================
+ * ====================采购公告=========================
+ * =====================================================
+ */
+/** 获取采购公告列表 GET /api/resource/getPurchaseAnnouncementList */
+export async function getPurchaseAnnouncementList(
+  params: {
+    // query
+    /** 当前的页码 */
+    current?: number;
+    /** 页面的容量 */
+    pageSize?: number;
+  },
+  options?: { [key: string]: any },
+) {
+  return request<API.RuleList>('/api/resource/getPurchaseAnnouncementList', {
+    method: 'GET',
+    params: {
+      ...params,
+    },
+    ...(options || {}),
+  });
+}
+
+/** 更新采购公告列表 POST /api/resource/updatePurchaseAnnouncement */
+export async function updatePurchaseAnnouncement(data: any, options?: { [key: string]: any }) {
+  return request<any>('/api/resource/updatePurchaseAnnouncement', {
+    method: 'POST',
+    data,
+    ...(options || {}),
+  });
+}
+
+/** 创建采购公告 POST /api/resource/createPurchaseAnnouncement */
+export async function createPurchaseAnnouncement(data: any, options?: { [key: string]: any }) {
+  console.log('2222222222222222', data);
+  return request<any>('/api/resource/createPurchaseAnnouncement', {
+    method: 'POST',
+    data,
+    ...(options || {}),
+  });
+}
+
+/** 批量删除征询意见 POST /api/resource/deletePurchaseAnnouncements */
+export async function deletePurchaseAnnouncements(data: any, options?: { [key: string]: any }) {
+  console.log('2222222222222222', data);
+  return request<any>('/api/resource/deletePurchaseAnnouncements', {
+    method: 'POST',
+    data,
+    ...(options || {}),
+  });
+}

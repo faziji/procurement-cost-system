@@ -6,7 +6,7 @@ import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import ProForm, { ModalForm, ProFormDateTimePicker, ProFormRadio, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
-import UpdateForm from './components/UpdateForm';
+import UpdateForm from '../components/UpdateForm';
 
 import { getConsultationList, createtConsultation, deleteConsultations, updateConsultation } from '@/services/resources/api'
 
@@ -161,7 +161,7 @@ const Consultation: React.FC = () => {
 
   const columns: ProColumns<API.RuleListItem>[] = [
     {
-      title: <FormattedMessage id="pages.searchTable.ID" defaultMessage="ID" />,
+      title: "ID",
       dataIndex: 'id',
       valueType: 'textarea',
     },
@@ -256,7 +256,7 @@ const Consultation: React.FC = () => {
             setCurrentRow(record);
           }}
         >
-          配置
+          更新
         </a>
       ],
     },

@@ -5,7 +5,6 @@ import {
   ProFormText,
   ProFormTextArea,
   StepsForm,
-  ProFormRadio,
   ProFormDateTimePicker,
 } from '@ant-design/pro-form';
 import { useIntl } from 'umi';
@@ -24,10 +23,7 @@ const UpdateForm: React.FC<any> = (props) => {
             width={640}
             bodyStyle={{ padding: '32px 40px 48px' }}
             destroyOnClose
-            title={intl.formatMessage({
-              id: 'pages.searchTable.updateForm.ruleConfig',
-              defaultMessage: '征询意见配置',
-            })}
+            title="配置"
             visible={props.updateModalVisible}
             footer={submitter}
             onCancel={() => {
@@ -49,27 +45,13 @@ const UpdateForm: React.FC<any> = (props) => {
           key: props.values.key,
           id: props.values.id
         }}
-        title={intl.formatMessage({
-          id: 'pages.searchTable.updateForm.basicConfig',
-          defaultMessage: '基本信息',
-        })}
+        title="基本信息"
       >
         <ProFormText
           name="id"
-          label={intl.formatMessage({
-            id: 'pages.searchTable.updateForm.ruleName.ID',
-            defaultMessage: 'ID',
-          })}
+          label="ID"
           width="md"
           disabled
-        />
-        <ProFormText
-          name="description"
-          label={intl.formatMessage({
-            id: 'pages.searchTable.updateForm.ruleName.description',
-            defaultMessage: '征询意见描述',
-          })}
-          width="md"
         />
         <ProFormDateTimePicker
           name="startTime"
@@ -96,7 +78,7 @@ const UpdateForm: React.FC<any> = (props) => {
         <ProFormTextArea
           name="description"
           width="md"
-          label="描述"
+          label="意见描述"
         />
       </StepsForm.StepForm>
       <StepsForm.StepForm
@@ -104,10 +86,7 @@ const UpdateForm: React.FC<any> = (props) => {
           type: '1',
           frequency: 'month',
         }}
-        title={intl.formatMessage({
-          id: 'pages.searchTable.updateForm.schedulingPeriod.title',
-          defaultMessage: '选择关联公告',
-        })}
+        title="选择关联公告"
       >
         <ProFormDateTimePicker
           name="time"
