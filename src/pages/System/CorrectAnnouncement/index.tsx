@@ -291,7 +291,7 @@ const CorrectAnnouncement: React.FC = () => {
   return (
     <PageContainer>
       <ProTable<API.RuleListItem, API.PageParams>
-        headerTitle="查询结果公告"
+        headerTitle="查询更正公告"
         actionRef={actionRef}
         rowKey="id"
         search={{
@@ -343,10 +343,7 @@ const CorrectAnnouncement: React.FC = () => {
       {/* 关闭即销毁 */}
       {createModalVisible ?
         <ModalForm
-          title={intl.formatMessage({
-            id: 'pages.searchTable.createForm.newRule',
-            defaultMessage: 'New rule',
-          })}
+          title="新建更正公告"
           width="1200px"
           visible={createModalVisible}
           onVisibleChange={handleModalVisibleMethod}

@@ -354,10 +354,7 @@ const Consultation: React.FC = () => {
       {/* 关闭即销毁 */}
       {createModalVisible ?
         <ModalForm
-          title={intl.formatMessage({
-            id: 'pages.searchTable.createForm.newRule',
-            defaultMessage: 'New rule',
-          })}
+          title="新建征询意见"
           width="1200px"
           visible={createModalVisible}
           onVisibleChange={handleModalVisibleMethod}

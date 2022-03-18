@@ -342,10 +342,7 @@ const ResultAnnouncement: React.FC = () => {
       {/* 关闭即销毁 */}
       {createModalVisible ?
         <ModalForm
-          title={intl.formatMessage({
-            id: 'pages.searchTable.createForm.newRule',
-            defaultMessage: 'New rule',
-          })}
+          title="新建结果公告"
           width="1200px"
           visible={createModalVisible}
           onVisibleChange={handleModalVisibleMethod}

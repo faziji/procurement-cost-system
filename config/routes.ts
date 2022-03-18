@@ -67,12 +67,12 @@
       },
     ],
   },
-  {
-    name: 'list.table-list',
-    icon: 'table',
-    path: '/list',
-    component: './TableList',
-  },
+  // {
+  //   name: 'list.table-list',
+  //   icon: 'table',
+  //   path: '/list',
+  //   component: './TableList',
+  // },
   {
     path: '/system',
     icon: 'SettingOutlined',
@@ -102,6 +102,46 @@
         name: '更正公告',
         icon: 'smile',
         component: './system/CorrectAnnouncement',
+      },
+      {
+        component: './404',
+      },
+    ],
+  },
+  {
+    path: '/Tender',
+    icon: 'AimOutlined',
+    name: '招投标管理',
+    routes: [
+      {
+        path: '/Tender/apply',
+        name: '投标管理',
+        component: './Tender/Apply',
+      },
+      {
+        path: '/Tender/result',
+        name: '成交结果',
+        component: './Tender/Result',
+      },
+      {
+        component: './404',
+      },
+    ],
+  },
+  {
+    path: '/Financial',
+    icon: 'MoneyCollectOutlined',
+    name: '财务管理',
+    routes: [
+      {
+        path: '/Financial/contract',
+        name: '合同管理',
+        component: './Financial/Contract',
+      },
+      {
+        path: '/Financial/invoice',
+        name: '发票管理',
+        component: './Financial/Invoice',
       },
       {
         component: './404',
