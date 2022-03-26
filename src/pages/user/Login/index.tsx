@@ -81,7 +81,7 @@ const Login: React.FC = () => {
         {/* <TestPage /> */}
         <LoginForm
           logo={<img alt="logo" src="/logo.svg" />}
-          // title="采购和费控系统"  // 暂时先注释，以免明目张胆
+          title="采购和费控系统"  // 暂时先注释，以免明目张胆
 
           subTitle={intl.formatMessage({ id: 'pages.layouts.userLayout.title' })}
           // initialValues={{
