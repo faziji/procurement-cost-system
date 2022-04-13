@@ -1,4 +1,4 @@
-﻿export default [
+export default [
   {
     path: '/user',
     layout: false,
@@ -17,6 +17,12 @@
         component: './404',
       },
     ],
+  },
+  {
+    name: '分析页',
+    icon: 'smile',
+    path: '/welcome/dashboardanalysis',
+    component: './StatisticBasic/DashboardAnalysis',
   },
   {
     path: '/welcome',
@@ -41,9 +47,7 @@
         component: './404',
       },
     ],
-  },
-
-  // 个人中心
+  }, // 个人中心
   {
     path: '/account',
     name: 'account',
@@ -66,8 +70,7 @@
         component: './404',
       },
     ],
-  },
-  // {
+  }, // {
   //   name: 'list.table-list',
   //   icon: 'table',
   //   path: '/list',
