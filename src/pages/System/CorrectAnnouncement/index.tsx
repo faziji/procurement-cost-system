@@ -159,7 +159,7 @@ const CorrectAnnouncement: React.FC = () => {
       valueType: 'textarea',
     },
     {
-      title: "意见名称",
+      title: "更正公告名称",
       dataIndex: 'name',
       tip: 'The file name is the unique key',
       render: (dom, entity) => {
@@ -385,27 +385,27 @@ const CorrectAnnouncement: React.FC = () => {
               ]}
               width="md"
               name="name"
-              label="意见名称："
+              label="更正公告名称："
             />
             <ProFormDateTimePicker
               name="startTime"
               width="md"
-              label="意见生效时间"
+              label="生效时间"
               rules={[
                 {
                   required: true,
-                  message: '请选择意见生效时间！',
+                  message: '请选择生效时间！',
                 },
               ]}
             />
             <ProFormDateTimePicker
               name="endTime"
               width="md"
-              label="意见结束时间"
+              label="结束时间"
               rules={[
                 {
                   required: true,
-                  message: '请选择意见结束时间！',
+                  message: '请选择结束时间！',
                 },
               ]}
             />
