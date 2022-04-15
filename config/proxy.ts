@@ -21,7 +21,7 @@ export default {
   test: {
     '/api/': {
       target: 'https://proapi.azurewebsites.net',
-      // target: 'http://http://172.21.40.25:3000',
+      // target: 'http://localhost:3000',
       changeOrigin: true,
       pathRewrite: { '^': '' },
     },
@@ -29,7 +29,7 @@ export default {
   pre: {
     '/api/': {
       // target: 'your pre url',
-      target: 'http://http://localhost:3000',
+      target: 'http://localhost:3000',
       changeOrigin: true,
       pathRewrite: { '^': '' },
     },

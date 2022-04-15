@@ -360,7 +360,7 @@ const Hr: React.FC = () => {
           }}
         >
           <div style={{ margin: "30px" }}>
-            <Upload data={{ token: localStorage.getItem("token") }} onChange={handleUploadConsultation} action="http://172.21.40.25:3000/api/resource/uploadResource" showUploadList={false}>
+            <Upload data={{ token: localStorage.getItem("token") }} onChange={handleUploadConsultation} action="http://localhost:3000/api/resource/uploadResource" showUploadList={false}>
               <Button>
                 <UploadOutlined />
                 上传文件
