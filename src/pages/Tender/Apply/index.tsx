@@ -1,21 +1,20 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, message, Drawer } from 'antd';
+import { Button, message, Drawer, Modal } from 'antd';
 import React, { useState, useRef } from 'react';
 import { FormattedMessage } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 
-import { getPurchaseAnnouncementList, deletePurchaseAnnouncements } from '@/services/resources/api';
-
-// 文件预览
-import ProDescriptions, { ProDescriptionsItemProps } from '@ant-design/pro-descriptions';
+import { getPurchaseAnnouncementList } from '@/services/resources/api';
+import { getTenderList } from '@/services/tender/api';
 
 const Apply: React.FC = () => {
   const [showDetail, setShowDetail] = useState<boolean>(false);
 
   const actionRef = useRef<ActionType>();
-  const [currentRow, setCurrentRow] = useState<API.RuleListItem>();
+  const [currentRow, setCurrentRow] = useState<any>();
+  const [tenderData, setTenderData] = useState<any>();
   const [selectedRowsState, setSelectedRows] = useState<API.RuleListItem[]>([]);
 
   const columns: ProColumns<API.RuleListItem>[] = [
@@ -33,7 +32,7 @@ const Apply: React.FC = () => {
           <a
             onClick={() => {
               setCurrentRow(entity);
-              setShowDetail(true);
+              searchTenderList();
             }}
           >
             {dom}
@@ -103,6 +102,24 @@ const Apply: React.FC = () => {
     },
   ];
 
+  const searchTenderList = async () => {
+    console.log('点击了确认');
+    await getTenderList({ announcementId: 1 })
+      .then((result) => {
+        const { data } = result;
+        if (!data?.length) {
+          message.info('该项目无投标记录！');
+          return;
+        }
+        setShowDetail(true);
+        setTenderData(result?.data);
+        console.log('请求成功', result);
+      })
+      .catch((err) => {
+        console.log('发生了错误', err);
+      });
+  };
+
   return (
     <PageContainer>
       <ProTable<API.RuleListItem, API.PageParams>
@@ -132,29 +149,20 @@ const Apply: React.FC = () => {
           },
         }}
       />
-      {/* <Drawer
-                width={600}
-                visible={showDetail}
-                onClose={() => {
-                    setCurrentRow(undefined);
-                    setShowDetail(false);
-                }}
-                closable={false}
-            >
-                {currentRow?.name && (
-                    <ProDescriptions<API.RuleListItem>
-                        column={2}
-                        title={currentRow?.name}
-                        request={async () => ({
-                            data: currentRow || {},
-                        })}
-                        params={{
-                            id: currentRow?.name,
-                        }}
-                        columns={columns as ProDescriptionsItemProps<API.RuleListItem>[]}
-                    />
-                )}
-            </Drawer> */}
+
+      {showDetail ? (
+        <Modal
+          title={currentRow?.name + '投标记录' || '详情'}
+          visible={showDetail}
+          onCancel={() => setShowDetail(false)}
+          footer={
+            [] // 设置footer为空，去掉 取消 确定默认按钮
+          }
+          width={1400}
+        >
+          <p>{JSON.stringify(tenderData)}</p>
+        </Modal>
+      ) : null}
     </PageContainer>
   );
 };
