@@ -16,7 +16,6 @@ import ProForm, {
 import { getResultList } from '@/services/tender/api';
 
 import {
-  getPurchaseAnnouncementList,
   updatePurchaseAnnouncement,
   createPurchaseAnnouncement,
   deletePurchaseAnnouncements,
