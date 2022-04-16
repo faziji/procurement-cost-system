@@ -32,7 +32,7 @@ const Apply: React.FC = () => {
           <a
             onClick={() => {
               setCurrentRow(entity);
-              searchTenderList();
+              searchTenderList(entity);
             }}
           >
             {dom}
@@ -101,10 +101,42 @@ const Apply: React.FC = () => {
       valueType: 'textarea',
     },
   ];
+  const columnsDetails: any = [
+    {
+      title: 'ID',
+      dataIndex: 'id',
+      valueType: 'textarea',
+    },
+    {
+      title: '采购公告名称',
+      dataIndex: 'announcementName',
+      valueType: 'textarea',
+    },
+    {
+      title: '供应商',
+      dataIndex: 'supplierUsername',
+      valueType: 'textarea',
+    },
+    {
+      title: '投标金额(元)',
+      dataIndex: 'amount',
+      valueType: 'number',
+    },
+    {
+      title: '附件',
+      dataIndex: 'attachment',
+      valueType: 'textarea',
+    },
+    {
+      title: '投标时间',
+      dataIndex: 'createdAt',
+      valueType: 'textarea',
+    },
+  ];
 
-  const searchTenderList = async () => {
+  const searchTenderList = async (entity: any) => {
     console.log('点击了确认');
-    await getTenderList({ announcementId: 1 })
+    await getTenderList({ announcementId: entity?.id })
       .then((result) => {
         const { data } = result;
         if (!data?.length) {
@@ -112,7 +144,7 @@ const Apply: React.FC = () => {
           return;
         }
         setShowDetail(true);
-        setTenderData(result?.data);
+        setTenderData(data);
         console.log('请求成功', result);
       })
       .catch((err) => {
@@ -129,18 +161,6 @@ const Apply: React.FC = () => {
         search={{
           labelWidth: 120,
         }}
-        toolBarRender={() => [
-          <Button
-            type="primary"
-            key="primary"
-            disabled
-            onClick={() => {
-              // handleModalVisible(true);
-            }}
-          >
-            <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="New" />
-          </Button>,
-        ]}
         request={getPurchaseAnnouncementList}
         columns={columns}
         rowSelection={{
@@ -158,9 +178,19 @@ const Apply: React.FC = () => {
           footer={
             [] // 设置footer为空，去掉 取消 确定默认按钮
           }
-          width={1400}
+          width={1500}
         >
-          <p>{JSON.stringify(tenderData)}</p>
+          <ProTable
+            headerTitle="查询投标项目详情"
+            actionRef={actionRef}
+            rowKey="id"
+            search={{
+              labelWidth: 120,
+            }}
+            params={{ announcementId: currentRow?.id }}
+            request={getTenderList}
+            columns={columnsDetails}
+          />
         </Modal>
       ) : null}
     </PageContainer>
