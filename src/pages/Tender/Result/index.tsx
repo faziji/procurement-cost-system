@@ -13,6 +13,8 @@ import ProForm, {
   ProFormTextArea,
 } from '@ant-design/pro-form';
 
+import { getResultList } from '@/services/tender/api';
+
 import {
   getPurchaseAnnouncementList,
   updatePurchaseAnnouncement,
@@ -171,86 +173,35 @@ const Result: React.FC = () => {
       },
     },
     {
-      title: '描述',
-      dataIndex: 'description',
+      title: '关联采购公告id',
+      dataIndex: 'announcementId',
       valueType: 'textarea',
     },
     {
-      title: '状态',
-      dataIndex: 'status',
-      hideInForm: true,
-      valueEnum: {
-        0: {
-          text: (
-            <FormattedMessage
-              id="pages.searchTable.nameStatus.default"
-              defaultMessage="Unpublished"
-            />
-          ),
-          status: 'Default',
-        },
-        1: {
-          text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.running" defaultMessage="Running" />
-          ),
-          status: 'Processing',
-        },
-        2: {
-          text: (
-            <FormattedMessage
-              id="pages.searchTable.nameStatus.finished"
-              defaultMessage="Finished"
-            />
-          ),
-          status: 'Error',
-        },
-        3: {
-          text: (
-            <FormattedMessage
-              id="pages.searchTable.nameStatus.abnormal"
-              defaultMessage="Abnormal"
-            />
-          ),
-          status: 'Error',
-        },
-      },
-    },
-    {
-      title: '发布人',
-      dataIndex: 'publisher',
+      title: '关联采购公告名称',
+      dataIndex: 'announcementName',
       valueType: 'textarea',
     },
     {
-      title: '发布时间',
-      dataIndex: 'publishTime',
+      title: '成交供应商信用代码',
+      dataIndex: 'supplierUsername',
       valueType: 'textarea',
     },
     {
-      title: '生效时间',
-      dataIndex: 'startTime',
+      title: '成交供应商名称',
+      dataIndex: 'supplierName',
       valueType: 'textarea',
     },
     {
-      title: '结束时间',
-      dataIndex: 'endTime',
+      title: '成交金额',
+      dataIndex: 'amount',
       valueType: 'textarea',
     },
-    // {
-    //     title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="Operating" />,
-    //     dataIndex: 'option',
-    //     valueType: 'option',
-    //     render: (_, record) => [
-    //         <a
-    //             key="config"
-    //             onClick={() => {
-    //                 handleUpdateModalVisible(true);
-    //                 setCurrentRow(record);
-    //             }}
-    //         >
-    //             更新
-    //         </a>
-    //     ],
-    // },
+    {
+      title: '财务结算时间',
+      dataIndex: 'createdAt',
+      valueType: 'textarea',
+    },
   ];
 
   /**
@@ -308,7 +259,7 @@ const Result: React.FC = () => {
             <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="New" />
           </Button>,
         ]}
-        request={getPurchaseAnnouncementList}
+        request={getResultList}
         columns={columns}
         rowSelection={{
           onChange: (_, selectedRows) => {
@@ -443,7 +394,7 @@ const Result: React.FC = () => {
             params={{
               id: currentRow?.name,
             }}
-            columns={columns as ProDescriptionsItemProps<API.RuleListItem>[]}
+            columns={columns}
           />
         )}
       </Drawer>

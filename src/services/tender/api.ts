@@ -120,3 +120,17 @@ export async function getTenderList(
     ...(options || {}),
   });
 }
+
+/** 获取成交结果列表 GET /api/tender/getResultList */
+export async function getResultList(
+  params: any,
+  options?: { [key: string]: any },
+) {
+  return request<any>('/api/tender/getResultList', {
+    method: 'GET',
+    params: {
+      ...params,
+    },
+    ...(options || {}),
+  });
+}
