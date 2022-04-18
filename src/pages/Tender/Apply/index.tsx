@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, message, Drawer, Modal } from 'antd';
+import { Button, message, Drawer, Modal, Descriptions, Alert } from 'antd';
 import React, { useState, useRef } from 'react';
 import { FormattedMessage } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
@@ -22,6 +22,18 @@ const Apply: React.FC = () => {
       title: 'ID',
       dataIndex: 'id',
       valueType: 'textarea',
+      render: (dom, entity) => {
+        return (
+          <a
+            onClick={() => {
+              setCurrentRow(entity);
+              searchTenderList(entity);
+            }}
+          >
+            {dom}
+          </a>
+        );
+      },
     },
     {
       title: '投标项目名称',
@@ -100,6 +112,23 @@ const Apply: React.FC = () => {
       dataIndex: 'endTime',
       valueType: 'textarea',
     },
+    {
+      title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="Operating" />,
+      dataIndex: 'option',
+      valueType: 'option',
+      render: (_, record) => [
+        <a
+          key="config"
+          onClick={() => {
+            // handleUpdateModalVisible(true);
+            setCurrentRow(record);
+            searchTenderList(record);
+          }}
+        >
+          生成结果
+        </a>,
+      ],
+    },
   ];
   const columnsDetails: any = [
     {
@@ -107,13 +136,18 @@ const Apply: React.FC = () => {
       dataIndex: 'id',
       valueType: 'textarea',
     },
+    // {
+    //   title: '采购公告名称',
+    //   dataIndex: 'announcementName',
+    //   valueType: 'textarea',
+    // },
     {
-      title: '采购公告名称',
-      dataIndex: 'announcementName',
+      title: '供应商信用代码',
+      dataIndex: 'supplierUsername',
       valueType: 'textarea',
     },
     {
-      title: '供应商',
+      title: '供应商名称',
       dataIndex: 'supplierUsername',
       valueType: 'textarea',
     },
@@ -180,6 +214,27 @@ const Apply: React.FC = () => {
           }
           width={1500}
         >
+          {/* {JSON.stringify(currentRow)} */}
+          {currentRow?.status == 4 && <Alert message="已生成结果" type="success" showIcon />}
+          <Descriptions title="项目信息">
+            <Descriptions.Item label="项目名称">{currentRow?.name}</Descriptions.Item>
+            <Descriptions.Item label="项目描述">{currentRow?.description}</Descriptions.Item>
+            <Descriptions.Item label="项目状态">
+              {currentRow?.status == 0
+                ? '未发布'
+                : currentRow?.status == 1
+                ? '已上线'
+                : currentRow?.status == 2
+                ? '已结束'
+                : currentRow?.status == 3
+                ? '已终止'
+                : '已生成结果报告'}
+            </Descriptions.Item>
+            <Descriptions.Item label="开始时间">{currentRow?.startTime}</Descriptions.Item>
+            <Descriptions.Item label="结束时间">{currentRow?.endTime}</Descriptions.Item>
+            <Descriptions.Item label="发布时间">{currentRow?.publishTime}</Descriptions.Item>
+          </Descriptions>
+          ,
           <ProTable
             headerTitle="查询投标项目详情"
             actionRef={actionRef}
@@ -190,6 +245,18 @@ const Apply: React.FC = () => {
             params={{ announcementId: currentRow?.id }}
             request={getTenderList}
             columns={columnsDetails}
+            toolBarRender={() => [
+              <Button
+                type="primary"
+                key="primary"
+                onClick={() => {
+                  console.log('生成结果');
+                }}
+                disabled={currentRow?.status == 4}
+              >
+                生成结果
+              </Button>,
+            ]}
           />
         </Modal>
       ) : null}
