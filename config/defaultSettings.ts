@@ -13,7 +13,7 @@ const Settings: LayoutSettings & {
   colorWeak: false,
   title: '采购和费控管理后台',
   pwa: false,
-  logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
+  logo: 'https://hyweb-test.oss-cn-shenzhen.aliyuncs.com/extension/pic/e577f6f7/ad4665a847_1597888775639.png',
   iconfontUrl: '',
 };
 
