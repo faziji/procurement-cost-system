@@ -61,14 +61,6 @@ const Supplier: React.FC = () => {
   const [uploadName, setUploadName] = useState("")
 
   /**
-   * 新建表格预览
-   */
-  const onError = (e: any) => {
-    console.log('显示错误');
-  }
-
-
-  /**
  * @en-US Add node
  * @zh-CN 添加节点
  * @param fields
@@ -292,40 +284,6 @@ const Supplier: React.FC = () => {
     },
   ];
 
-  /**
-   * 弹窗预览
-   */
-  const content = () => {
-    return (
-      <div>
-        <FileViewer
-          style={{ backgroundColor: "red" }}
-          fileType="docx"
-          filePath={uploadUrl || ''}
-          errorComponent={CustomErrorComponent}
-          onError={onError} />
-      </div>
-    )
-  }
-
-  const handleUploadConsultation = (info: any) => {
-    if (info.file.status !== 'uploading') {
-      console.log(info.file, info.fileList);
-    }
-    if (info.file.status === 'done') {
-      let fileListLength = info.fileList.length - 1
-      let { key, hash, resourceUrl, name } = info.fileList[fileListLength].response.data
-      setUploadKey(key)
-      setUploadHash(hash)
-      setUploadUrl(resourceUrl)
-      setUploadName(name)
-
-      message.success("上传成功");
-    } else if (info.file.status === 'error') {
-      message.error("上传失败！");
-    }
-  }
-
   return (
     <PageContainer>
       <ProTable
@@ -379,87 +337,6 @@ const Supplier: React.FC = () => {
           </Button>
         </FooterToolbar>
       )}
-      {/* 关闭即销毁 */}
-      {/* {createModalVisible ?
-        <ModalForm
-          title={intl.formatMessage({
-            id: 'pages.searchTable.createForm.newRule',
-            defaultMessage: 'New rule',
-          })}
-          width="1200px"
-          visible={createModalVisible}
-          onVisibleChange={handleModalVisibleMethod}
-          onFinish={async (value) => {
-            const success = await handleAdd(value);
-            if (success) {
-              handleModalVisible(false);
-              // 有改动，关闭弹窗时也自动清空
-              if (actionRef.current) {
-                actionRef.current.reload();
-              }
-
-            }
-          }}
-        >
-          <div style={{ margin: "30px" }}>
-            <Upload data={{ token: localStorage.getItem("token") }} onChange={handleUploadConsultation} action="http://localhost:3000/api/resource/uploadResource" showUploadList={false}>
-              <Button>
-                <UploadOutlined />
-                上传文件
-              </Button>
-            </Upload>
-            <Popover content={content} title="文件预览" trigger="hover" placement="right">
-              <a href={uploadUrl}>{uploadName}</a>
-            </Popover>
-          </div>
-          <ProForm.Group>
-            <ProFormText
-              rules={[
-                {
-                  required: true,
-                  message: (
-                    <FormattedMessage
-                      id="pages.searchTable.createForm.InputNameLabel"
-                      defaultMessage="file name is required"
-                    />
-                  ),
-                },
-              ]}
-              width="md"
-              name="name"
-              label="意见名称："
-            />
-            <ProFormDateTimePicker
-              name="startTime"
-              width="md"
-              label="意见生效时间"
-              rules={[
-                {
-                  required: true,
-                  message: '请选择意见生效时间！',
-                },
-              ]}
-            />
-            <ProFormDateTimePicker
-              name="endTime"
-              width="md"
-              label="意见结束时间"
-              rules={[
-                {
-                  required: true,
-                  message: '请选择意见结束时间！',
-                },
-              ]}
-            />
-            <ProFormTextArea width="md" label="描述" name="description" />
-            <ProFormRadio.Group
-              label="发布类型"
-              name="statusType"
-              initialValue="新建暂不发布"
-              options={['新建暂不发布', '新建并发布']}
-            />
-          </ProForm.Group>
-        </ModalForm> : null} */}
       {reviewModalVisible ?
         <ModalForm
           title="资格审核"
@@ -479,7 +356,7 @@ const Supplier: React.FC = () => {
             }
           }}
         >
-          {JSON.stringify(currentRow)}
+          {/* {JSON.stringify(currentRow)} */}
           {
             currentRow?.username && (
               <>
