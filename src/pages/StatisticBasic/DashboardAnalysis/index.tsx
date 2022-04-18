@@ -104,16 +104,6 @@ const DashboardAnalysis: FC<DashboardAnalysisProps> = () => {
           <IntroduceRow loading={loading} visitData={data?.visitData || []} />
         </Suspense>
 
-        <Suspense fallback={null}>
-          <SalesCard
-            rangePickerValue={rangePickerValue}
-            salesData={data?.salesData || []}
-            isActive={isActive}
-            handleRangePickerChange={handleRangePickerChange}
-            loading={loading}
-            selectDate={selectDate}
-          />
-        </Suspense>
 
         <Row
           gutter={24}
@@ -144,7 +134,19 @@ const DashboardAnalysis: FC<DashboardAnalysisProps> = () => {
           </Col>
         </Row>
 
+
         <Suspense fallback={null}>
+          <SalesCard
+            rangePickerValue={rangePickerValue}
+            salesData={data?.salesData || []}
+            isActive={isActive}
+            handleRangePickerChange={handleRangePickerChange}
+            loading={loading}
+            selectDate={selectDate}
+          />
+        </Suspense>
+
+        {/* <Suspense fallback={null}>
           <OfflineData
             activeKey={activeKey}
             loading={loading}
@@ -152,7 +154,7 @@ const DashboardAnalysis: FC<DashboardAnalysisProps> = () => {
             offlineChartData={data?.offlineChartData || []}
             handleTabChange={handleTabChange}
           />
-        </Suspense>
+        </Suspense> */}
       </>
     </GridContent>
   );

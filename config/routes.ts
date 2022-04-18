@@ -53,17 +53,17 @@ export default [
     ],
   },
   {
-    name: '分析页',
+    name: '首页',
     icon: 'smile',
-    path: '/welcome/dashboardanalysis',
+    path: '/welcome',
     component: './StatisticBasic/DashboardAnalysis',
   },
-  {
-    path: '/welcome',
-    name: 'welcome',
-    icon: 'smile',
-    component: './Welcome',
-  },
+  // {
+  //   path: '/welcome',
+  //   name: 'welcome',
+  //   icon: 'smile',
+  //   component: './Welcome',
+  // },
   // {
   //   path: '/admin',
   //   name: 'admin',

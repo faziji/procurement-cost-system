@@ -24,96 +24,146 @@ for (let i = 0; i < fakeY2.length; i += 1) {
 }
 
 const salesData = [];
-for (let i = 0; i < 12; i += 1) {
+for (let i = 0; i < 4; i += 1) {
   salesData.push({
     x: `${i + 1}月`,
-    y: Math.floor(Math.random() * 1000) + 200,
+    y: Math.floor(Math.random() * 10) + 25,
   });
 }
+
+function random(min: any, max: any) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+// 关键词
+const keysValue = [
+  '结果公告',
+  '采购公告',
+  '更正公告',
+  '征询意见',
+  '招投标',
+  '投标',
+  '招标',
+  '开标时间',
+  '反馈',
+  '后台',
+  '模板',
+  '下载',
+  '政策',
+  '部门概况',
+  '办事指南',
+  '党建工作',
+  '联系我们',
+  '旧版入口',
+  '管理入口',
+  '公告',
+  '定向公示',
+  '征求意见',
+  '工作动态',
+];
 const searchData = [];
 for (let i = 0; i < 50; i += 1) {
   searchData.push({
     index: i + 1,
-    keyword: `搜索关键词-${i}`,
-    count: Math.floor(Math.random() * 1000),
-    range: Math.floor(Math.random() * 100),
+    keyword: keysValue[Math.floor(Math.random() * (22 - 0)) + 0],
+    count: Math.floor(Math.random() * 10),
+    range: Math.floor(Math.random() * 10),
     status: Math.floor((Math.random() * 10) % 2),
   });
 }
 const salesTypeData = [
   {
-    x: '家用电器',
-    y: 4544,
+    x: '部门概况',
+    y: 9,
   },
   {
-    x: '食用酒水',
-    y: 3321,
+    x: '政策法规',
+    y: 8,
   },
   {
-    x: '个护健康',
-    y: 3113,
+    x: '办事指南',
+    y: 4,
   },
   {
-    x: '服饰箱包',
-    y: 2341,
-  },
-  {
-    x: '母婴产品',
-    y: 1231,
+    x: '下载中心',
+    y: 5,
   },
   {
     x: '其他',
-    y: 1231,
+    y: 15,
+  },
+  {
+    x: '征询意见',
+    y: 12,
+  },
+  {
+    x: '采购公告',
+    y: 1,
+  },
+  {
+    x: '更正公告',
+    y: 14,
+  },
+  {
+    x: '结果公告',
+    y: 18,
+  },
+  {
+    x: '日历搜索',
+    y: 14,
+  },
+  {
+    x: '其他',
+    y: 15,
   },
 ];
 
 const salesTypeDataOnline = [
   {
-    x: '家用电器',
-    y: 244,
+    x: '征询意见',
+    y: 2,
   },
   {
-    x: '食用酒水',
-    y: 321,
+    x: '采购公告',
+    y: 1,
   },
   {
-    x: '个护健康',
-    y: 311,
+    x: '更正公告',
+    y: 14,
   },
   {
-    x: '服饰箱包',
-    y: 41,
+    x: '结果公告',
+    y: 18,
   },
   {
-    x: '母婴产品',
-    y: 121,
+    x: '日历搜索',
+    y: 14,
   },
   {
     x: '其他',
-    y: 111,
+    y: 15,
   },
 ];
 
 const salesTypeDataOffline = [
   {
-    x: '家用电器',
-    y: 99,
+    x: '部门概况',
+    y: 9,
   },
   {
-    x: '食用酒水',
-    y: 188,
+    x: '政策法规',
+    y: 8,
   },
   {
-    x: '个护健康',
-    y: 344,
+    x: '办事指南',
+    y: 4,
   },
   {
-    x: '服饰箱包',
-    y: 255,
+    x: '下载中心',
+    y: 5,
   },
   {
     x: '其他',
-    y: 65,
+    y: 15,
   },
 ];
 

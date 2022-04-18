@@ -40,7 +40,7 @@ const ProportionSales = ({
     },
     statistic: {
       title: {
-        content: '销售额',
+        content: '阅读量',
       },
     },
   };
@@ -50,7 +50,7 @@ const ProportionSales = ({
       loading={loading}
       className={styles.salesCard}
       bordered={false}
-      title="销售额类别占比"
+      title="查看公告模块占比"
       style={{
         height: '100%',
       }}
@@ -59,17 +59,17 @@ const ProportionSales = ({
           {dropdownGroup}
           <div className={styles.salesTypeRadio}>
             <Radio.Group value={salesType} onChange={handleChangeSalesType}>
-              <Radio.Button value="all">全部渠道</Radio.Button>
-              <Radio.Button value="online">线上</Radio.Button>
-              <Radio.Button value="stores">门店</Radio.Button>
+              <Radio.Button value="all">全部信息</Radio.Button>
+              <Radio.Button value="online">资讯信息</Radio.Button>
+              <Radio.Button value="stores">公告信息</Radio.Button>
             </Radio.Group>
           </div>
         </div>
       }
     >
       <div>
-        <Text>销售额</Text>
-        <Pie {...pieConfig} />
+        <Text>阅读量</Text>
+        <Pie style={{ height: '400px' }} {...pieConfig} />
       </div>
     </Card>
   );

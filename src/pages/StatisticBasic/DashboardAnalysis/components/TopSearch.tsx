@@ -54,8 +54,8 @@ const TopSearch = ({
   <Card
     loading={loading}
     bordered={false}
-    title="线上热门搜索"
-    extra={dropdownGroup}
+    title="热门搜索"
+    // extra={dropdownGroup}
     style={{
       height: '100%',
     }}
@@ -66,15 +66,15 @@ const TopSearch = ({
           subTitle={
             <span>
               搜索用户数
-              <Tooltip title="指标说明">
+              <Tooltip title="搜索相同关键词的人数">
                 <InfoCircleOutlined style={{ marginLeft: 8 }} />
               </Tooltip>
             </span>
           }
           gap={8}
-          total={numeral(12321).format('0,0')}
+          total={numeral(6).format('0,0')}
           status="up"
-          subTotal={17.1}
+          subTotal={20}
         />
         <TinyArea height={45} autoFit smooth data={visitData2.map((item) => item.y)} />
       </Col>
@@ -83,7 +83,7 @@ const TopSearch = ({
           subTitle={
             <span>
               人均搜索次数
-              <Tooltip title="指标说明">
+              <Tooltip title="每人搜索相同关键词的次数">
                 <InfoCircleOutlined style={{ marginLeft: 8 }} />
               </Tooltip>
             </span>

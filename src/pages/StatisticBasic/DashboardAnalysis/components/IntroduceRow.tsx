@@ -22,24 +22,24 @@ const IntroduceRow = ({ loading, visitData = [] }: { loading: boolean; visitData
     <Col {...topColResponsiveProps}>
       <ChartCard
         bordered={false}
-        title="总销售额"
+        title="总公告数"
         action={
           <Tooltip title="指标说明">
             <InfoCircleOutlined />
           </Tooltip>
         }
         loading={loading}
-        total={() => <Yuan>126560</Yuan>}
-        footer={<Field label="日销售额" value={`￥${numeral(12423).format('0,0')}`} />}
+        total={() => <>102</>}
+        footer={<Field label="今日新增" value={`${numeral(3).format('0,0')}`} />}
         contentHeight={46}
       >
         <Trend flag="up" style={{ marginRight: 16 }}>
           周同比
-          <span className={styles.trendText}>12%</span>
+          <span className={styles.trendText}>3%</span>
         </Trend>
         <Trend flag="down">
           日同比
-          <span className={styles.trendText}>11%</span>
+          <span className={styles.trendText}>5%</span>
         </Trend>
       </ChartCard>
     </Col>
@@ -48,14 +48,14 @@ const IntroduceRow = ({ loading, visitData = [] }: { loading: boolean; visitData
       <ChartCard
         bordered={false}
         loading={loading}
-        title="访问量"
+        title="本月访问量"
         action={
-          <Tooltip title="指标说明">
+          <Tooltip title="本月前台用户的访问量统计">
             <InfoCircleOutlined />
           </Tooltip>
         }
-        total={numeral(8846).format('0,0')}
-        footer={<Field label="日访问量" value={numeral(1234).format('0,0')} />}
+        total={numeral(46).format('0,0')}
+        footer={<Field label="日访问量" value={numeral(3).format('0,0')} />}
         contentHeight={46}
       >
         <TinyArea
@@ -77,14 +77,14 @@ const IntroduceRow = ({ loading, visitData = [] }: { loading: boolean; visitData
       <ChartCard
         bordered={false}
         loading={loading}
-        title="支付笔数"
+        title="本月投标数量统计"
         action={
-          <Tooltip title="指标说明">
+          <Tooltip title="统计本月的投标数量">
             <InfoCircleOutlined />
           </Tooltip>
         }
-        total={numeral(6560).format('0,0')}
-        footer={<Field label="转化率" value="60%" />}
+        total={numeral(8).format('0,0')}
+        footer={<Field label="昨日投标数" value="2" />}
         contentHeight={46}
       >
         <TinyColumn height={46} autoFit data={visitData.map((item) => item.y)} />
@@ -94,9 +94,9 @@ const IntroduceRow = ({ loading, visitData = [] }: { loading: boolean; visitData
       <ChartCard
         loading={loading}
         bordered={false}
-        title="运营活动效果"
+        title="通知处理时效性"
         action={
-          <Tooltip title="指标说明">
+          <Tooltip title="是否在规定时间内处理审批请求">
             <InfoCircleOutlined />
           </Tooltip>
         }

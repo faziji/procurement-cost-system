@@ -147,6 +147,14 @@ export default () => {
       clearClose
     >
       <NoticeIcon.Tab
+        tabKey="event"
+        title="待办"
+        emptyText="你已完成所有待办"
+        count={2}
+        list={list}
+        showViewMore
+      />
+      <NoticeIcon.Tab
         tabKey="notification"
         count={2}
         list={list}
@@ -160,14 +168,6 @@ export default () => {
         list={list}
         title="消息"
         emptyText="您已读完所有消息"
-        showViewMore
-      />
-      <NoticeIcon.Tab
-        tabKey="event"
-        title="待办"
-        emptyText="你已完成所有待办"
-        count={2}
-        list={list}
         showViewMore
       />
     </NoticeIcon>

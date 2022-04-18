@@ -21,12 +21,12 @@ const Welcome: React.FC = () => {
   const intl = useIntl();
   return (
     <PageContainer>
-      <StatisticBasic />
+      {/* <StatisticBasic />
       <StatisticCountdown />
       <StatisticCard />
-      <StatisticUnit />
+      <StatisticUnit /> */}
       <h1>首页</h1>
-      <TestPage />
+      {/* <TestPage /> */}
       {/* <Card>
       <Alert
       message={intl.formatMessage({

@@ -65,9 +65,9 @@ const SalesCard = ({
         size="large"
         tabBarStyle={{ marginBottom: 24 }}
       >
-        <TabPane tab="销售额" key="sales">
+        {/* <TabPane tab="阅读量" key="sales">
           <Row>
-            <Col xl={16} lg={12} md={12} sm={24} xs={24}>
+            <Col xl={24} lg={12} md={12} sm={24} xs={24}>
               <div className={styles.salesBar}>
                 <Column
                   height={300}
@@ -89,31 +89,11 @@ const SalesCard = ({
                 />
               </div>
             </Col>
-            <Col xl={8} lg={12} md={12} sm={24} xs={24}>
-              <div className={styles.salesRank}>
-                <h4 className={styles.rankingTitle}>门店销售额排名</h4>
-                <ul className={styles.rankingList}>
-                  {rankingListData.map((item, i) => (
-                    <li key={item.title}>
-                      <span className={`${styles.rankingItemNumber} ${i < 3 ? styles.active : ''}`}>
-                        {i + 1}
-                      </span>
-                      <span className={styles.rankingItemTitle} title={item.title}>
-                        {item.title}
-                      </span>
-                      <span className={styles.rankingItemValue}>
-                        {numeral(item.total).format('0,0')}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Col>
           </Row>
-        </TabPane>
+        </TabPane> */}
         <TabPane tab="访问量" key="views">
           <Row>
-            <Col xl={16} lg={12} md={12} sm={24} xs={24}>
+            <Col xl={24} lg={12} md={12} sm={24} xs={24}>
               <div className={styles.salesBar}>
                 <Column
                   height={300}
@@ -135,7 +115,7 @@ const SalesCard = ({
                 />
               </div>
             </Col>
-            <Col xl={8} lg={12} md={12} sm={24} xs={24}>
+            {/* <Col xl={8} lg={12} md={12} sm={24} xs={24}>
               <div className={styles.salesRank}>
                 <h4 className={styles.rankingTitle}>门店访问量排名</h4>
                 <ul className={styles.rankingList}>
@@ -152,7 +132,7 @@ const SalesCard = ({
                   ))}
                 </ul>
               </div>
-            </Col>
+            </Col> */}
           </Row>
         </TabPane>
       </Tabs>

@@ -5,6 +5,8 @@ import { useModel, SelectLang } from 'umi';
 import Avatar from './AvatarDropdown';
 import HeaderSearch from '../HeaderSearch';
 import styles from './index.less';
+import NoticeIconView from '../NoticeIcon';
+
 
 export type SiderTheme = 'light' | 'dark';
 
@@ -42,9 +44,9 @@ const GlobalHeaderRight: React.FC = () => {
             value: 'Pro Layout',
           },
         ]}
-        // onSearch={value => {
-        //   console.log('input', value);
-        // }}
+      // onSearch={value => {
+      //   console.log('input', value);
+      // }}
       />
       <span
         className={styles.action}
@@ -54,6 +56,7 @@ const GlobalHeaderRight: React.FC = () => {
       >
         <QuestionCircleOutlined />
       </span>
+      <NoticeIconView />
       <Avatar />
       <SelectLang className={styles.action} />
     </Space>
