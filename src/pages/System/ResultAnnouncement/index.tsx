@@ -50,7 +50,7 @@ const ResultAnnouncement: React.FC = () => {
   const [showDetail, setShowDetail] = useState<boolean>(false);
 
   const actionRef = useRef<ActionType>();
-  const [currentRow, setCurrentRow] = useState<API.RuleListItem>();
+  const [currentRow, setCurrentRow] = useState<any>();
   const [selectedRowsState, setSelectedRows] = useState<API.RuleListItem[]>([]);
 
   // 上传成功
@@ -438,7 +438,7 @@ const ResultAnnouncement: React.FC = () => {
 
       <UpdateForm
         onSubmit={async (value: any) => {
-          const success = await handleUpdate(value);
+          const success = await handleUpdate({ ...value, id: currentRow?.id });
           if (success) {
             handleUpdateModalVisible(false);
             setCurrentRow(undefined);

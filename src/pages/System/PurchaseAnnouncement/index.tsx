@@ -438,7 +438,7 @@ const PurchaseAnnouncement: React.FC = () => {
 
       <UpdateForm
         onSubmit={async (value: any) => {
-          const success = await handleUpdate(value);
+          const success = await handleUpdate({ ...value, id: currentRow?.id });
           if (success) {
             handleUpdateModalVisible(false);
             setCurrentRow(undefined);

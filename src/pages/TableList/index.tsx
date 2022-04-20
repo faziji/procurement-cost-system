@@ -22,7 +22,7 @@ const handleAdd = async (fields: API.RuleListItem) => {
   try {
     await addRule({ ...fields });
     hide();
-    message.success('Added successfully');
+    message.success('添加成功！');
     return true;
   } catch (error) {
     hide();

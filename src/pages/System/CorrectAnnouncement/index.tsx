@@ -50,7 +50,7 @@ const CorrectAnnouncement: React.FC = () => {
   const [showDetail, setShowDetail] = useState<boolean>(false);
 
   const actionRef = useRef<ActionType>();
-  const [currentRow, setCurrentRow] = useState<API.RuleListItem>();
+  const [currentRow, setCurrentRow] = useState<any>();
   const [selectedRowsState, setSelectedRows] = useState<API.RuleListItem[]>([]);
 
   // 上传成功
@@ -97,7 +97,7 @@ const CorrectAnnouncement: React.FC = () => {
       // 失败
       if (res?.code) throw false;
       hide();
-      message.success('Added successfully');
+      message.success('添加成功！');
       return true;
     } catch (error) {
       hide();
@@ -438,7 +438,7 @@ const CorrectAnnouncement: React.FC = () => {
 
       <UpdateForm
         onSubmit={async (value: any) => {
-          const success = await handleUpdate(value);
+          const success = await handleUpdate({ ...value, id: currentRow?.id });
           if (success) {
             handleUpdateModalVisible(false);
             setCurrentRow(undefined);
