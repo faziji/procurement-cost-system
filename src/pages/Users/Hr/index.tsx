@@ -5,18 +5,28 @@ import { useIntl, FormattedMessage } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
-import ProForm, { ModalForm, ProFormDateTimePicker, ProFormRadio, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
+import ProForm, {
+  ModalForm,
+  ProFormDateTimePicker,
+  ProFormRadio,
+  ProFormText,
+  ProFormTextArea,
+} from '@ant-design/pro-form';
 import UpdateForm from './components/UpdateForm';
 
-import { getConsultationList, createtConsultation, deleteConsultations, updateConsultation } from '@/services/resources/api'
-import { getUserList, updateUser } from '@/services/user/hr'
+import {
+  getConsultationList,
+  createtConsultation,
+  deleteConsultations,
+  updateConsultation,
+} from '@/services/resources/api';
+import { getUserList, updateUser } from '@/services/user/hr';
 
 // 文件预览
 import FileViewer from 'react-file-viewer';
 import { CustomErrorComponent } from 'custom-error';
 import ProDescriptions, { ProDescriptionsItemProps } from '@ant-design/pro-descriptions';
 import moment from 'moment';
-
 
 const Hr: React.FC = () => {
   /**
@@ -25,13 +35,12 @@ const Hr: React.FC = () => {
    *  */
   const [createModalVisible, handleModalVisible] = useState<boolean>(false);
   const handleModalVisibleMethod = (value: any) => {
-    handleModalVisible(value)
-    setUploadName('')
-    setUploadKey('')
-    setUploadHash('')
-    setUploadUrl('')
-  }
-
+    handleModalVisible(value);
+    setUploadName('');
+    setUploadKey('');
+    setUploadHash('');
+    setUploadUrl('');
+  };
 
   /**
    * @en-US The pop-up window of the distribution update window
@@ -46,39 +55,38 @@ const Hr: React.FC = () => {
   const [selectedRowsState, setSelectedRows] = useState<any>([]);
 
   // 上传成功
-  const [uploadKey, setUploadKey] = useState("")
-  const [uploadHash, setUploadHash] = useState("")
-  const [uploadUrl, setUploadUrl] = useState("")
-  const [uploadName, setUploadName] = useState("")
+  const [uploadKey, setUploadKey] = useState('');
+  const [uploadHash, setUploadHash] = useState('');
+  const [uploadUrl, setUploadUrl] = useState('');
+  const [uploadName, setUploadName] = useState('');
 
   /**
    * 新建表格预览
    */
   const onError = (e: any) => {
     console.log('显示错误');
-  }
-
+  };
 
   /**
- * @en-US Add node
- * @zh-CN 添加节点
- * @param fields
- */
+   * @en-US Add node
+   * @zh-CN 添加节点
+   * @param fields
+   */
   const handleAdd = async (fields: any) => {
     let addValue = {
       publisher: localStorage.getItem('username'),
       hash: uploadHash,
       key: uploadKey,
-      publishTime: moment().format("YYYY-MM-DD HH:mm:ss")
-    }
+      publishTime: moment().format('YYYY-MM-DD HH:mm:ss'),
+    };
 
     let reqData = {
       ...fields,
       ...addValue,
-    }
+    };
 
     // 未上传文件
-    const { hash, key } = reqData
+    const { hash, key } = reqData;
     if (!hash || !key) {
       message.error('请先上传文件！');
       return false;
@@ -88,11 +96,10 @@ const Hr: React.FC = () => {
     try {
       let res = await createtConsultation({ ...reqData });
       // 失败
-      if (res?.code) throw false
-
+      if (res?.code) throw false;
 
       hide();
-      message.success('Added successfully');
+      message.success('用户信息导入成功！');
       return true;
     } catch (error) {
       hide();
@@ -112,7 +119,6 @@ const Hr: React.FC = () => {
     try {
       await updateUser({ ...fields, username: currentRow?.username });
       console.log('111111111111', fields);
-
 
       hide();
 
@@ -156,12 +162,12 @@ const Hr: React.FC = () => {
 
   const columns: ProColumns<any>[] = [
     {
-      title: "ID",
+      title: 'ID',
       dataIndex: 'id',
       valueType: 'textarea',
     },
     {
-      title: "姓名",
+      title: '姓名',
       dataIndex: 'name',
       tip: 'The file name is the unique key',
       render: (dom, entity) => {
@@ -178,7 +184,7 @@ const Hr: React.FC = () => {
       },
     },
     {
-      title: "部门",
+      title: '部门',
       dataIndex: 'role',
       search: false,
       renderFormItem: (_, { defaultRender }) => {
@@ -186,58 +192,66 @@ const Hr: React.FC = () => {
       },
       render: (_, record) => (
         <Space>
-          {record?.role === 'procurement' && <Tag color="green" key={record?.role}>
-            采购部门
-          </Tag>}
-          {record?.role === 'financial' && <Tag color="orange" key={record?.role}>
-            财务部门
-          </Tag>}
-          {record?.role === 'specialist' && <Tag color="blue" key={record?.role}>
-            专家评审
-          </Tag>}
-          {record?.role === 'hr' && <Tag color="pink" key={record?.role}>
-            人事部门
-          </Tag>}
+          {record?.role === 'procurement' && (
+            <Tag color="green" key={record?.role}>
+              采购部门
+            </Tag>
+          )}
+          {record?.role === 'financial' && (
+            <Tag color="orange" key={record?.role}>
+              财务部门
+            </Tag>
+          )}
+          {record?.role === 'specialist' && (
+            <Tag color="blue" key={record?.role}>
+              专家评审
+            </Tag>
+          )}
+          {record?.role === 'hr' && (
+            <Tag color="pink" key={record?.role}>
+              人事部门
+            </Tag>
+          )}
         </Space>
       ),
     },
     {
-      title: "状态",
+      title: '状态',
       dataIndex: 'status',
       hideInForm: true,
       valueEnum: {
-        'enable': {
-          text: "启用中",
+        enable: {
+          text: '启用中',
           status: 'Success',
         },
-        'disable': {
-          text: "已禁用",
+        disable: {
+          text: '已禁用',
           status: 'Error',
         },
       },
     },
     {
-      title: "联系人电话",
+      title: '联系人电话',
       dataIndex: 'phone',
       valueType: 'textarea',
     },
     {
-      title: "邮箱",
+      title: '邮箱',
       dataIndex: 'email',
       valueType: 'textarea',
     },
     {
-      title: "身份证号码",
+      title: '身份证号码',
       dataIndex: 'idNumber',
       valueType: 'textarea',
     },
     {
-      title: "加入日期",
+      title: '加入日期',
       dataIndex: 'joinDate',
       valueType: 'textarea',
     },
     {
-      title: "操作",
+      title: '操作',
       dataIndex: 'option',
       valueType: 'option',
       render: (_, record) => [
@@ -249,7 +263,7 @@ const Hr: React.FC = () => {
           }}
         >
           更新
-        </a>
+        </a>,
       ],
     },
   ];
@@ -261,32 +275,33 @@ const Hr: React.FC = () => {
     return (
       <div>
         <FileViewer
-          style={{ backgroundColor: "red" }}
+          style={{ backgroundColor: 'red' }}
           fileType="docx"
           filePath={uploadUrl || ''}
           errorComponent={CustomErrorComponent}
-          onError={onError} />
+          onError={onError}
+        />
       </div>
-    )
-  }
+    );
+  };
 
   const handleUploadConsultation = (info: any) => {
     if (info.file.status !== 'uploading') {
       console.log(info.file, info.fileList);
     }
     if (info.file.status === 'done') {
-      let fileListLength = info.fileList.length - 1
-      let { key, hash, resourceUrl, name } = info.fileList[fileListLength].response.data
-      setUploadKey(key)
-      setUploadHash(hash)
-      setUploadUrl(resourceUrl)
-      setUploadName(name)
+      let fileListLength = info.fileList.length - 1;
+      let { key, hash, resourceUrl, name } = info.fileList[fileListLength].response.data;
+      setUploadKey(key);
+      setUploadHash(hash);
+      setUploadUrl(resourceUrl);
+      setUploadName(name);
 
-      message.success("上传成功");
+      message.success('上传成功');
     } else if (info.file.status === 'error') {
-      message.error("上传失败！");
+      message.error('上传失败！');
     }
-  }
+  };
 
   return (
     <PageContainer>
@@ -341,7 +356,7 @@ const Hr: React.FC = () => {
         </FooterToolbar>
       )}
       {/* 关闭即销毁 */}
-      {createModalVisible ?
+      {createModalVisible ? (
         <ModalForm
           title="新建人员资料"
           width="1200px"
@@ -355,12 +370,16 @@ const Hr: React.FC = () => {
               if (actionRef.current) {
                 actionRef.current.reload();
               }
-
             }
           }}
         >
-          <div style={{ margin: "30px" }}>
-            <Upload data={{ token: localStorage.getItem("token") }} onChange={handleUploadConsultation} action="http://localhost:3000/api/resource/uploadResource" showUploadList={false}>
+          <div style={{ margin: '30px' }}>
+            <Upload
+              data={{ token: localStorage.getItem('token') }}
+              onChange={handleUploadConsultation}
+              action="http://localhost:3000/api/resource/uploadResource"
+              showUploadList={false}
+            >
               <Button>
                 <UploadOutlined />
                 上传文件
@@ -375,7 +394,7 @@ const Hr: React.FC = () => {
               rules={[
                 {
                   required: true,
-                  message: "name is required",
+                  message: 'name is required',
                 },
               ]}
               width="md"
@@ -401,7 +420,8 @@ const Hr: React.FC = () => {
               options={['新建暂不发布', '新建并发布']}
             />
           </ProForm.Group>
-        </ModalForm> : null}
+        </ModalForm>
+      ) : null}
 
       <UpdateForm
         onSubmit={async (value: any) => {

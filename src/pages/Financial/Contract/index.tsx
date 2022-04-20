@@ -93,7 +93,7 @@ const Contract: React.FC = () => {
       // 失败
       if (res?.code) throw false;
       hide();
-      message.success('Added successfully');
+      message.success('添加合同成功！');
       return true;
     } catch (error) {
       hide();

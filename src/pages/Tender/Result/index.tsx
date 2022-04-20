@@ -91,7 +91,7 @@ const Result: React.FC = () => {
       // 失败
       if (res?.code) throw false;
       hide();
-      message.success('Added successfully');
+      message.success('添加结果公告成功！');
       return true;
     } catch (error) {
       hide();

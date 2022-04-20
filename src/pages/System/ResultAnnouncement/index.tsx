@@ -5,17 +5,27 @@ import { useIntl, FormattedMessage } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
-import ProForm, { ModalForm, ProFormDateTimePicker, ProFormRadio, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
+import ProForm, {
+  ModalForm,
+  ProFormDateTimePicker,
+  ProFormRadio,
+  ProFormText,
+  ProFormTextArea,
+} from '@ant-design/pro-form';
 import UpdateForm from '../components/UpdateForm';
 
-import { getResultAnnouncementList, updateResultAnnouncement, createResultAnnouncement, deleteResultAnnouncements } from '@/services/resources/api'
+import {
+  getResultAnnouncementList,
+  updateResultAnnouncement,
+  createResultAnnouncement,
+  deleteResultAnnouncements,
+} from '@/services/resources/api';
 
 // 文件预览
 import FileViewer from 'react-file-viewer';
 import { CustomErrorComponent } from 'custom-error';
 import ProDescriptions, { ProDescriptionsItemProps } from '@ant-design/pro-descriptions';
 import moment from 'moment';
-
 
 const ResultAnnouncement: React.FC = () => {
   /**
@@ -24,12 +34,12 @@ const ResultAnnouncement: React.FC = () => {
    *  */
   const [createModalVisible, handleModalVisible] = useState<boolean>(false);
   const handleModalVisibleMethod = (value: any) => {
-    handleModalVisible(value)
-    setUploadName('')
-    setUploadKey('')
-    setUploadHash('')
-    setUploadUrl('')
-  }
+    handleModalVisible(value);
+    setUploadName('');
+    setUploadKey('');
+    setUploadHash('');
+    setUploadUrl('');
+  };
 
   /**
    * @en-US The pop-up window of the distribution update window
@@ -44,39 +54,38 @@ const ResultAnnouncement: React.FC = () => {
   const [selectedRowsState, setSelectedRows] = useState<API.RuleListItem[]>([]);
 
   // 上传成功
-  const [uploadKey, setUploadKey] = useState("")
-  const [uploadHash, setUploadHash] = useState("")
-  const [uploadUrl, setUploadUrl] = useState("")
-  const [uploadName, setUploadName] = useState("")
+  const [uploadKey, setUploadKey] = useState('');
+  const [uploadHash, setUploadHash] = useState('');
+  const [uploadUrl, setUploadUrl] = useState('');
+  const [uploadName, setUploadName] = useState('');
 
   /**
    * 新建表格预览
    */
   const onError = (e: any) => {
     console.log('显示错误');
-  }
-
+  };
 
   /**
- * @en-US Add node
- * @zh-CN 添加节点
- * @param fields
- */
+   * @en-US Add node
+   * @zh-CN 添加节点
+   * @param fields
+   */
   const handleAdd = async (fields: any) => {
     let addValue = {
       publisher: localStorage.getItem('username'),
       hash: uploadHash,
       key: uploadKey,
-      publishTime: moment().format("YYYY-MM-DD HH:mm:ss")
-    }
+      publishTime: moment().format('YYYY-MM-DD HH:mm:ss'),
+    };
 
     let reqData = {
       ...fields,
       ...addValue,
-    }
+    };
 
     // 未上传文件
-    const { hash, key } = reqData
+    const { hash, key } = reqData;
     if (!hash || !key) {
       message.error('请先上传文件！');
       return false;
@@ -86,9 +95,9 @@ const ResultAnnouncement: React.FC = () => {
     try {
       let res = await createResultAnnouncement({ ...reqData });
       // 失败
-      if (res?.code) throw false
+      if (res?.code) throw false;
       hide();
-      message.success('Added successfully');
+      message.success('添加结果公告成功！');
       return true;
     } catch (error) {
       hide();
@@ -109,7 +118,7 @@ const ResultAnnouncement: React.FC = () => {
     const hide = message.loading('Configuring');
     try {
       let res = await updateResultAnnouncement(fields);
-      if (res?.code) throw false
+      if (res?.code) throw false;
       hide();
 
       message.success('Configuration is successful');
@@ -134,7 +143,7 @@ const ResultAnnouncement: React.FC = () => {
       let res = await deleteResultAnnouncements({
         ids: selectedRows.map((row: any) => row.id),
       });
-      if (res?.code) throw false
+      if (res?.code) throw false;
       hide();
       message.success('Deleted successfully and will refresh soon');
       return true;
@@ -153,12 +162,12 @@ const ResultAnnouncement: React.FC = () => {
 
   const columns: ProColumns<API.RuleListItem>[] = [
     {
-      title: "ID",
+      title: 'ID',
       dataIndex: 'id',
       valueType: 'textarea',
     },
     {
-      title: "结果公告名称",
+      title: '结果公告名称',
       dataIndex: 'name',
       tip: 'The file name is the unique key',
       render: (dom, entity) => {
@@ -175,12 +184,12 @@ const ResultAnnouncement: React.FC = () => {
       },
     },
     {
-      title: "描述",
+      title: '描述',
       dataIndex: 'description',
       valueType: 'textarea',
     },
     {
-      title: "状态",
+      title: '状态',
       dataIndex: 'status',
       hideInForm: true,
       valueEnum: {
@@ -201,7 +210,10 @@ const ResultAnnouncement: React.FC = () => {
         },
         2: {
           text: (
-            <FormattedMessage id="pages.searchTable.nameStatus.finished" defaultMessage="Finished" />
+            <FormattedMessage
+              id="pages.searchTable.nameStatus.finished"
+              defaultMessage="Finished"
+            />
           ),
           status: 'Error',
         },
@@ -217,22 +229,22 @@ const ResultAnnouncement: React.FC = () => {
       },
     },
     {
-      title: "发布人",
+      title: '发布人',
       dataIndex: 'publisher',
       valueType: 'textarea',
     },
     {
-      title: "发布时间",
+      title: '发布时间',
       dataIndex: 'publishTime',
       valueType: 'textarea',
     },
     {
-      title: "生效时间",
+      title: '生效时间',
       dataIndex: 'startTime',
       valueType: 'textarea',
     },
     {
-      title: "结束时间",
+      title: '结束时间',
       dataIndex: 'endTime',
       valueType: 'textarea',
     },
@@ -249,7 +261,7 @@ const ResultAnnouncement: React.FC = () => {
           }}
         >
           更新
-        </a>
+        </a>,
       ],
     },
   ];
@@ -264,28 +276,29 @@ const ResultAnnouncement: React.FC = () => {
           fileType="docx"
           filePath={uploadUrl || ''}
           errorComponent={CustomErrorComponent}
-          onError={onError} />
+          onError={onError}
+        />
       </div>
-    )
-  }
+    );
+  };
 
   const handleUploadConsultation = (info: any) => {
     if (info.file.status !== 'uploading') {
       console.log(info.file, info.fileList);
     }
     if (info.file.status === 'done') {
-      let fileListLength = info.fileList.length - 1
-      let { key, hash, resourceUrl, name } = info.fileList[fileListLength].response.data
-      setUploadKey(key)
-      setUploadHash(hash)
-      setUploadUrl(resourceUrl)
-      setUploadName(name)
+      let fileListLength = info.fileList.length - 1;
+      let { key, hash, resourceUrl, name } = info.fileList[fileListLength].response.data;
+      setUploadKey(key);
+      setUploadHash(hash);
+      setUploadUrl(resourceUrl);
+      setUploadName(name);
 
-      message.success("上传成功");
+      message.success('上传成功');
     } else if (info.file.status === 'error') {
-      message.error("上传失败！");
+      message.error('上传失败！');
     }
-  }
+  };
 
   return (
     <PageContainer>
@@ -340,7 +353,7 @@ const ResultAnnouncement: React.FC = () => {
         </FooterToolbar>
       )}
       {/* 关闭即销毁 */}
-      {createModalVisible ?
+      {createModalVisible ? (
         <ModalForm
           title="新建结果公告"
           width="1200px"
@@ -354,12 +367,16 @@ const ResultAnnouncement: React.FC = () => {
               if (actionRef.current) {
                 actionRef.current.reload();
               }
-
             }
           }}
         >
-          <div style={{ margin: "30px" }}>
-            <Upload data={{ token: localStorage.getItem("token") }} onChange={handleUploadConsultation} action="http://localhost:3000/api/resource/uploadResource" showUploadList={false}>
+          <div style={{ margin: '30px' }}>
+            <Upload
+              data={{ token: localStorage.getItem('token') }}
+              onChange={handleUploadConsultation}
+              action="http://localhost:3000/api/resource/uploadResource"
+              showUploadList={false}
+            >
               <Button>
                 <UploadOutlined />
                 上传文件
@@ -416,7 +433,8 @@ const ResultAnnouncement: React.FC = () => {
               options={['新建暂不发布', '新建并发布']}
             />
           </ProForm.Group>
-        </ModalForm> : null}
+        </ModalForm>
+      ) : null}
 
       <UpdateForm
         onSubmit={async (value: any) => {

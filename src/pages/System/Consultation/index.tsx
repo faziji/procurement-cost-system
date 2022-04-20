@@ -98,7 +98,7 @@ const Consultation: React.FC = () => {
       if (res?.code) throw false;
 
       hide();
-      message.success('Added successfully');
+      message.success('添加征询意见成功！');
       return true;
     } catch (error) {
       hide();
