@@ -254,6 +254,7 @@ const Hr: React.FC = () => {
       title: '操作',
       dataIndex: 'option',
       valueType: 'option',
+      width: 100,
       render: (_, record) => [
         <a
           key="config"

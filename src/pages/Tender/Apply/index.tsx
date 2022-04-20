@@ -61,6 +61,7 @@ const Apply: React.FC = () => {
       title: '状态',
       dataIndex: 'status',
       hideInForm: true,
+      width: 100,
       valueEnum: {
         0: {
           text: (
@@ -116,6 +117,7 @@ const Apply: React.FC = () => {
       title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="Operating" />,
       dataIndex: 'option',
       valueType: 'option',
+      width: 100,
       render: (_, record) => [
         <a
           key="config"

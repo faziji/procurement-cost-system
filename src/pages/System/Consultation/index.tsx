@@ -198,6 +198,7 @@ const Consultation: React.FC = () => {
       title: '状态',
       dataIndex: 'status',
       hideInForm: true,
+      width: 100,
       valueEnum: {
         0: {
           text: (
@@ -238,6 +239,7 @@ const Consultation: React.FC = () => {
       title: '发布人',
       dataIndex: 'publisher',
       valueType: 'textarea',
+      width: 100,
     },
     {
       title: '发布时间',

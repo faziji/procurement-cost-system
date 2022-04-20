@@ -192,6 +192,7 @@ const ResultAnnouncement: React.FC = () => {
       title: '状态',
       dataIndex: 'status',
       hideInForm: true,
+      width: 100,
       valueEnum: {
         0: {
           text: (
@@ -232,6 +233,7 @@ const ResultAnnouncement: React.FC = () => {
       title: '发布人',
       dataIndex: 'publisher',
       valueType: 'textarea',
+      width: 100,
     },
     {
       title: '发布时间',
@@ -252,6 +254,7 @@ const ResultAnnouncement: React.FC = () => {
       title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="Operating" />,
       dataIndex: 'option',
       valueType: 'option',
+      width: 100,
       render: (_, record) => [
         <a
           key="config"
