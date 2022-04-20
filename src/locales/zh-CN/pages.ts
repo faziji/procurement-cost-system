@@ -72,4 +72,5 @@ export default {
   'pages.searchTable.batchApproval': '批量审批',
   'pages.searchTable.createForm.InputNameLabel': '请输入文件名称',
   'menu.分析页': '分析页',
+  'menu.首页': '首页',
 };
