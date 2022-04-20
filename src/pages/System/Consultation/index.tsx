@@ -50,7 +50,7 @@ const Consultation: React.FC = () => {
   const [showDetail, setShowDetail] = useState<boolean>(false);
 
   const actionRef = useRef<ActionType>();
-  const [currentRow, setCurrentRow] = useState<API.RuleListItem>();
+  const [currentRow, setCurrentRow] = useState<any>();
   const [selectedRowsState, setSelectedRows] = useState<API.RuleListItem[]>([]);
 
   // 上传成功
@@ -116,12 +116,12 @@ const Consultation: React.FC = () => {
   const handleUpdate = async (fields: any) => {
     console.log('1111111111111111111', fields);
 
-    const hide = message.loading('Configuring');
+    const hide = message.loading('配置中...');
     try {
       await updateConsultation(fields);
       hide();
 
-      message.success('Configuration is successful');
+      message.success('配置成功');
       return true;
     } catch (error) {
       hide();
@@ -448,7 +448,7 @@ const Consultation: React.FC = () => {
 
       <UpdateForm
         onSubmit={async (value: any) => {
-          const success = await handleUpdate(value);
+          const success = await handleUpdate({ ...value, id: currentRow?.id });
           if (success) {
             handleUpdateModalVisible(false);
             setCurrentRow(undefined);

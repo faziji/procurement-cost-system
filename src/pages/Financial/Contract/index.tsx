@@ -111,13 +111,13 @@ const Contract: React.FC = () => {
   const handleUpdate = async (fields: any) => {
     console.log('1111111111111111111', fields);
 
-    const hide = message.loading('Configuring');
+    const hide = message.loading('配置中...');
     try {
       let res = await updatePurchaseAnnouncement(fields);
       if (res?.code) throw false;
       hide();
 
-      message.success('Configuration is successful');
+      message.success('配置成功');
       return true;
     } catch (error) {
       hide();

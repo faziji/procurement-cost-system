@@ -38,7 +38,7 @@ const handleAdd = async (fields: API.RuleListItem) => {
  * @param fields
  */
 const handleUpdate = async (fields: FormValueType) => {
-  const hide = message.loading('Configuring');
+  const hide = message.loading('配置中...');
   try {
     await updateRule({
       name: fields.name,
@@ -47,7 +47,7 @@ const handleUpdate = async (fields: FormValueType) => {
     });
     hide();
 
-    message.success('Configuration is successful');
+    message.success('配置成功');
     return true;
   } catch (error) {
     hide();
