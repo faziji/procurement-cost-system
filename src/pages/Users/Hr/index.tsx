@@ -74,7 +74,7 @@ const Hr: React.FC = () => {
    */
   const handleAdd = async (fields: any) => {
     let addValue = {
-      publisher: localStorage.getItem('username'),
+      publisher: JSON.parse(localStorage.getItem('userInfo') || '{}')?.name,
       hash: uploadHash,
       key: uploadKey,
       publishTime: moment().format('YYYY-MM-DD HH:mm:ss'),
