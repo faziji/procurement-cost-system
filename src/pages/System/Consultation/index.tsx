@@ -372,6 +372,19 @@ const Consultation: React.FC = () => {
           visible={createModalVisible}
           onVisibleChange={handleModalVisibleMethod}
           onFinish={async (value) => {
+            // 判断生效时间不能晚于结束时间
+            console.log('1111111111111', value);
+            const { startTime, endTime } = value;
+            // 转化为时间戳
+            let startTimeTamp = moment(startTime).valueOf();
+            let endTimeTamp = moment(endTime).valueOf();
+            if (endTimeTamp < startTimeTamp) {
+              message.info('结束时间不能晚于生效时间！');
+              return;
+            }
+
+            // moment(endTime).valueOf()
+
             const success = await handleAdd(value);
             if (success) {
               handleModalVisible(false);

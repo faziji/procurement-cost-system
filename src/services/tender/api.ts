@@ -134,3 +134,12 @@ export async function getResultList(
     ...(options || {}),
   });
 }
+
+/** 生成成交结果 GET /api/tender/createResult */
+export async function createResult(data: any, options?: { [key: string]: any }) {
+  return request<any>('/api/tender/createResult', {
+    method: 'POST',
+    data,
+    ...(options || {}),
+  });
+}

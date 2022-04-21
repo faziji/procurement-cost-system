@@ -197,7 +197,7 @@ const Result: React.FC = () => {
       valueType: 'textarea',
     },
     {
-      title: '财务结算时间',
+      title: '开标时间',
       dataIndex: 'createdAt',
       valueType: 'textarea',
     },

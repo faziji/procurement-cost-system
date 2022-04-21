@@ -209,26 +209,18 @@ const Contract: React.FC = () => {
       title: '关联采购公告id',
       dataIndex: 'announcementId',
       valueType: 'textarea',
+      width: 120,
     },
     {
       title: '关联采购公告名称',
       dataIndex: 'announcementName',
       valueType: 'textarea',
     },
-    // {
-    //   title: '合同供应商信用代码',
-    //   dataIndex: 'supplierUsername',
-    //   valueType: 'textarea',
-    // },
-    // {
-    //   title: '合同供应商名称',
-    //   dataIndex: 'supplierName',
-    //   valueType: 'textarea',
-    // },
     {
       title: '成交金额',
       dataIndex: 'amount',
       valueType: 'textarea',
+      width: 100,
     },
     {
       title: '采购定标时间',
